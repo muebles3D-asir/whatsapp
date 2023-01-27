@@ -4,13 +4,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Toolbar;
 
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
-    ActionBar toolbar;
+    androidx.appcompat.widget.Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +23,10 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("ESTADOS"));
         tabLayout.addTab(tabLayout.newTab().setText("LLAMADAS"));
 
-        toolbar = getSupportActionBar();
-        toolbar.setElevation(0);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Whatsapp");
+        setSupportActionBar(toolbar);
+
 
     }
 }
