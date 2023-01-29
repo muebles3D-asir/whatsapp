@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item
+        android:id="@+id/action_nuevoGrupo"
+        android:title="Nuevo grupo">
+    </item>
+    <item
+        android:id="@+id/action_nuevaDifusion"
+        android:title="Nueva difusión">
+    </item>
+    <item
+        android:id="@+id/action_DispositivosVinculados"
+        android:title="Dispositivos vinculados">
+    </item>
+    <item
+        android:id="@+id/action_mensajesDestacados"
+        android:title="Mensajes destacados">
+    </item>
+    <item
+        android:id="@+id/action_Ajustes"
+        android:title="Ajustes">
+    </item>
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/action_Foto"
+        android:icon="@drawable/camara"
+        android:title="foto">
+    </item>
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/action_Buscar"
+        android:icon="@drawable/buscar"
+        android:title="Buscar">
+    </item>
+</menu>
