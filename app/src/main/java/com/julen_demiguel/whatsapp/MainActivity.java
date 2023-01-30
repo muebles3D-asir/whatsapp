@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Whatsapp");
         setSupportActionBar(toolbar);
-        toolbar.setSubtitleTextColor(Color.WHITE);
+
 
 
     }
