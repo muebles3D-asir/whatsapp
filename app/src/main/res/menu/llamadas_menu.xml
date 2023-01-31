@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_BorrarLlamadas"
+        android:title="Borrar registro de llamadas" />
+    <item
+        android:id="@+id/action_AjustesLlamadas"
+        android:title="Ajustes" />
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/action_FotoLlamadas"
+        android:icon="@drawable/camara"
+        android:title="foto">
+    </item>
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/action_BuscarLlamadas"
+        android:icon="@drawable/buscar"
+        android:title="Buscar">
+    </item>
+</menu>

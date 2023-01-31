@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/action_PrivacidadEstados"
+            android:title="Privacidad de Estados" />
+        <item
+            android:id="@+id/action_AjustesEstados"
+            android:title="Ajustes" />
+        <item
+            app:showAsAction="ifRoom"
+            android:id="@+id/action_FotoEstados"
+            android:icon="@drawable/camara"
+            android:title="foto">
+        </item>
+        <item
+            app:showAsAction="ifRoom"
+            android:id="@+id/action_BuscarEstados"
+            android:icon="@drawable/buscar"
+            android:title="Buscar">
+        </item>
+</menu>
