@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -26,9 +27,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // Prueba de cambio (Álvaro)
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("CHATS"));
-        tabLayout.addTab(tabLayout.newTab().setText("ESTADOS"));
-        tabLayout.addTab(tabLayout.newTab().setText("LLAMADAS"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.comunidad));
+        tabLayout.addTab(tabLayout.newTab().setText("Chats"));
+        tabLayout.addTab(tabLayout.newTab().setText("Estados"));
+        tabLayout.addTab(tabLayout.newTab().setText("Llamadas"));
+        LinearLayout layout = ((LinearLayout) ((LinearLayout) tabLayout.getChildAt(0)).getChildAt(0));
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) layout.getLayoutParams();
+        layoutParams.weight = 0.5f; // e.g. 0.5f
+        layout.setLayoutParams(layoutParams);
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Whatsapp");
@@ -38,21 +44,25 @@ public class MainActivity extends AppCompatActivity {
         myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
+        viewPager.setCurrentItem(1);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
                 switch (position){
-                    case  0:
+                    case 0:
+                        toolbar.getMenu().clear();
+                        toolbar.inflateMenu(R.menu.community_menu);
+                        break;
+                    case  1:
                         toolbar.getMenu().clear();
                         toolbar.inflateMenu(R.menu.chats_menu);
                         break;
-                    case 1:
+                    case 2:
                         toolbar.getMenu().clear();
                         toolbar.inflateMenu(R.menu.estados_menu);
                         break;
-                    case 2:
+                    case 3:
                         toolbar.getMenu().clear();
                         toolbar.inflateMenu(R.menu.llamadas_menu);
                         break;

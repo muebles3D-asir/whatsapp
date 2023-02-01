@@ -27,7 +27,8 @@
         android:background="@color/Whatsapp"
         app:tabIconTint="@color/white"
         app:tabIndicatorColor="@color/white"
-        app:tabTextColor="@color/white"/>
+        app:tabTextColor="@color/white"
+        />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
