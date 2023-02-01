@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.julen_demiguel.whatsapp.fragments.ChatsFragment;
-import com.julen_demiguel.whatsapp.fragments.ComunityFragmnet;
 import com.julen_demiguel.whatsapp.fragments.EstadosFragment;
 import com.julen_demiguel.whatsapp.fragments.LlamadasFragment;
 
@@ -21,7 +20,6 @@ public class MyViewPagerAdapter extends FragmentStatePagerAdapter {
         super(fm, behavior);
         this.numberOfTabs = behavior;
         fragmentArray = new ArrayList<>();
-        fragmentArray.add(new ComunityFragmnet());
         fragmentArray.add(new ChatsFragment());
         fragmentArray.add(new EstadosFragment());
         fragmentArray.add(new LlamadasFragment());
