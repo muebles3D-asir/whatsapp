@@ -13,7 +13,7 @@ public class User {
         this.name = name;
         this.corre = corre;
         this.password = password;
-        this.fechaNac = fechaNac;
+
     }
 
     public String getName() {
@@ -40,11 +40,5 @@ public class User {
         this.password = password;
     }
 
-    public Date getFechaNac() {
-        return fechaNac;
-    }
 
-    public void setFechaNac(Date fechaNac) {
-        this.fechaNac = fechaNac;
-    }
 }
