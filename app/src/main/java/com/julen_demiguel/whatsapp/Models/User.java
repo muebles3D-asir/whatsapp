@@ -5,7 +5,7 @@ import java.util.Date;
 public class User {
     String name;
     String corre;
-    //String img;
+    String img;
     String password;
     Date fechaNac;
 
@@ -13,6 +13,17 @@ public class User {
         this.name = name;
         this.corre = corre;
         this.password = password;
+
+    }
+    public User(String name, String corre, String password, Date fechaNac, ) {
+        this.name = name;
+        this.corre = corre;
+        this.password = password;
+
+    }
+
+    public User() {
+
 
     }
 
