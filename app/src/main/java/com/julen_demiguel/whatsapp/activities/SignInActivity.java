@@ -2,6 +2,7 @@ package com.julen_demiguel.whatsapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,10 +17,11 @@ public class SignInActivity extends AppCompatActivity  {
 
 
     Button botonNextStep;
-    User usuarioRegistro = new User();
+    User usuarioRegistro;
     EditText nombre;
     EditText telefono;
     EditText email;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,10 @@ public class SignInActivity extends AppCompatActivity  {
                 if(nombre.getText().equals("") | telefono.getText().equals("") | email.getText().equals("")){
                     Toast.makeText(SignInActivity.this, "Debes rellenar todos los datos!!", Toast.LENGTH_SHORT).show();
                 } else {
+                   usuarioRegistro = new User(nombre.toString(), email.toString(), telefono.toString());
+                    Intent intent = new Intent(SignInActivity.this, SiginSecondStep.class);
+                    intent.putExtra("usuarioRegistro",  usuarioRegistro);
+                    startActivity(intent);
 
                 }
 

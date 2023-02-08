@@ -1,26 +1,24 @@
 package com.julen_demiguel.whatsapp.Models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
     String name;
     String corre;
     String img;
     String password;
-    Date fechaNac;
+    String telef;
 
-    public User(String name, String corre, String password, Date fechaNac) {
+    public User(String name, String corre, String telef ) {
         this.name = name;
         this.corre = corre;
-        this.password = password;
+        this.telef = telef;
+        this.password = "";
+        this.img = "";
 
     }
-    public User(String name, String corre, String password, Date fechaNac, ) {
-        this.name = name;
-        this.corre = corre;
-        this.password = password;
 
-    }
 
     public User() {
 
