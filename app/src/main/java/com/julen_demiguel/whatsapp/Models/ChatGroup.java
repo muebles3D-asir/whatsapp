@@ -1,7 +1,10 @@
 package com.julen_demiguel.whatsapp.Models;
 
+<<<<<<< HEAD
 import com.julen_demiguel.whatsapp.Application.MyApplication;
 
+=======
+>>>>>>> c0ad1c1fd880d7d4bef35b07293fc1e51941e2fd
 import java.util.ArrayList;
 
 import io.realm.RealmObject;
@@ -10,11 +13,14 @@ import io.realm.annotations.PrimaryKey;
 public class ChatGroup extends RealmObject {
 
     @PrimaryKey
+
     private int id;
+
     private ArrayList<Message> messages;
     private ArrayList<User> participants;
 
     public ChatGroup() {}
+
 
     public ChatGroup(ArrayList<User> participants) {
         this.id = MyApplication.chatID.incrementAndGet();
@@ -61,4 +67,5 @@ public class ChatGroup extends RealmObject {
     public void setParticipants(ArrayList<User> participants) {
         this.participants = participants;
     }
+
 }
