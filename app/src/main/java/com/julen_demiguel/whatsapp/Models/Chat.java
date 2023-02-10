@@ -4,6 +4,7 @@ import com.julen_demiguel.whatsapp.Application.MyApplication;
 
 import java.util.ArrayList;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -11,17 +12,17 @@ public class Chat extends RealmObject {
 
     @PrimaryKey
     private int id;
-    private ArrayList<Message> messages;
-    private User[] participants;
+    private RealmList<Message> messages;
+    private RealmList<User> participants;
 
     public Chat() {}
 
-    public Chat(User[] participants) {
+    public Chat(RealmList<User> participants) {
       this.id = MyApplication.chatID.incrementAndGet();
         this.participants = participants;
     }
 
-    public Chat(ArrayList<Message> messages, User[] participants) {
+    public Chat(RealmList<Message> messages, RealmList<User> participants) {
         this(participants);
         this.messages = messages;
     }
@@ -30,19 +31,19 @@ public class Chat extends RealmObject {
         return id;
     }
 
-    public ArrayList<Message> getMessages() {
+    public RealmList<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(ArrayList<Message> messages) {
+    public void setMessages(RealmList<Message> messages) {
         this.messages = messages;
     }
 
-    public User[] getParticipants() {
+    public RealmList<User> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(User[] participants) {
+    public void setParticipants(RealmList<User> participants) {
         this.participants = participants;
     }
 }

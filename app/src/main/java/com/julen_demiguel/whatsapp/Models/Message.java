@@ -1,5 +1,7 @@
 package com.julen_demiguel.whatsapp.Models;
 
+import com.julen_demiguel.whatsapp.Application.MyApplication;
+
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -16,7 +18,7 @@ public class Message extends RealmObject {
     public Message() {}
 
     public Message(String text, User sender, Date date) {
-//        this.id = MyApplication.messageID.incrementAndGet();
+        this.id = MyApplication.mensajeID.incrementAndGet();
         this.text = text;
         this.sender = sender;
         this.date = date;

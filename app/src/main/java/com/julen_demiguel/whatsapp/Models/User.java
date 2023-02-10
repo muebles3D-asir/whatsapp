@@ -3,8 +3,6 @@ package com.julen_demiguel.whatsapp.Models;
 import com.julen_demiguel.whatsapp.Application.MyApplication;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -14,20 +12,26 @@ public class User extends RealmObject implements Serializable {
     @PrimaryKey
     private int id;
     private String name;
-    private String corre;
     private String img;
     private String password;
     private String telef;
 
     public User(){}
 
-    public User(String name, String corre, String telef ) {
+    public User(String name, String telef ) {
         this.id = MyApplication.userID.incrementAndGet();
 
         this.name = name;
-        this.corre = corre;
         this.telef = telef;
         this.password = "";
+        this.img = "";
+    }
+
+    public User(String name,  String telef, String password) {
+        this.id = MyApplication.userID.incrementAndGet();
+        this.name = name;
+        this.telef = telef;
+        this.password = password;
         this.img = "";
     }
 
@@ -43,14 +47,6 @@ public class User extends RealmObject implements Serializable {
         this.name = name;
     }
 
-    public String getCorre() {
-        return corre;
-    }
-
-    public void setCorre(String corre) {
-        this.corre = corre;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -64,7 +60,7 @@ public class User extends RealmObject implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return corre.equals(user.corre);
+        return telef.equals(user.telef);
     }
 
 }
