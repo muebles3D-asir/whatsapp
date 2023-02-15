@@ -31,7 +31,7 @@ public class SignInActivity extends AppCompatActivity  {
             if(nombre.getText().equals("") || telefono.getText().equals("")){
                 Toast.makeText(SignInActivity.this, "Debes rellenar todos los datos!!", Toast.LENGTH_SHORT).show();
             } else {
-               usuarioRegistro = new User(nombre.toString(), telefono.toString());
+               usuarioRegistro = new User(nombre.getText().toString(), telefono.getText().toString());
                 Intent intent = new Intent(SignInActivity.this, SiginSecondStep.class);
                 intent.putExtra("usuarioRegistro",  usuarioRegistro);
                 startActivity(intent);

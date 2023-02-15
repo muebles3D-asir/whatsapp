@@ -21,12 +21,13 @@ public class MyApplication extends Application {
     public static AtomicInteger chatID = new AtomicInteger();
     public static AtomicInteger groupID = new AtomicInteger();
     public  static AtomicInteger mensajeID = new AtomicInteger();
+    public static User currentUser = new User();
 
     private <T extends RealmObject> AtomicInteger getIdByTable(Realm realm, Class<T>anyClass){
         RealmResults<T> results = realm.where(anyClass).findAll();
-        if(results.size()>0){
+        if(results.size() > 0) {
             return new AtomicInteger(results.max("id").intValue());
-        } else{
+        } else {
             return new AtomicInteger(0);
         }
     }

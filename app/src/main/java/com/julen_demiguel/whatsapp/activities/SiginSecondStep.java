@@ -36,7 +36,7 @@ public class SiginSecondStep extends AppCompatActivity {
                 Toast.makeText(SiginSecondStep.this, "Debes rellenar los campos porfavor", Toast.LENGTH_SHORT).show();
             } else{
                 if(password.getText().toString().equals(passwordRepeat.getText().toString())){
-                    usuarioRegistro.setPassword(password.toString());
+                    usuarioRegistro.setPassword(password.getText().toString());
                     realm = Realm.getDefaultInstance();
                     realm.beginTransaction();
                     realm.copyToRealmOrUpdate(usuarioRegistro);

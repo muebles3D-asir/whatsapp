@@ -12,7 +12,7 @@ public class User extends RealmObject implements Serializable {
     @PrimaryKey
     private int id;
     private String name;
-    private String img;
+    private int img;
     private String password;
     private String telef;
 
@@ -20,19 +20,29 @@ public class User extends RealmObject implements Serializable {
 
     public User(String name, String telef ) {
         this.id = MyApplication.userID.incrementAndGet();
-
         this.name = name;
         this.telef = telef;
         this.password = "";
-        this.img = "";
+        this.img = 0;
     }
 
     public User(String name,  String telef, String password) {
-        this.id = MyApplication.userID.incrementAndGet();
-        this.name = name;
-        this.telef = telef;
+        this(name, telef);
         this.password = password;
-        this.img = "";
+        this.img = 0;
+    }
+
+    public User(String name,  String telef, String password, String img) {
+        this(name, telef, password);
+        this.img = 0;
+    }
+
+    public int getImg() {
+        return img;
+    }
+
+    public void setImg(int img) {
+        this.img = img;
     }
 
     public int getId() {

@@ -69,13 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 viewPager.setCurrentItem(position);
-
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabUnselected(TabLayout.Tab tab) {}
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {

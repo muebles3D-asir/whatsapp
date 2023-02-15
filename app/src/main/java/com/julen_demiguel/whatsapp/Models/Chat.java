@@ -15,6 +15,7 @@ public class Chat extends RealmObject {
     private RealmList<Message> messages;
     private RealmList<User> participants;
 
+
     public Chat() {}
 
     public Chat(RealmList<User> participants) {
@@ -29,6 +30,18 @@ public class Chat extends RealmObject {
 
     public int getId() {
         return id;
+    }
+
+    public User getOtherUser() {
+        for (User user : participants) {
+            if (user.getId() != MyApplication.currentUser.getId())
+                return user;
+        }
+        return null;
+    }
+
+    public String getLastMessage() {
+        return messages.get(messages.size()-1).getText();
     }
 
     public RealmList<Message> getMessages() {

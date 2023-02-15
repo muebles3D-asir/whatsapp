@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.julen_demiguel.whatsapp.Application.MyApplication;
 import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.R;
 
@@ -68,7 +69,8 @@ public class LogInActivity extends AppCompatActivity {
                 Toast.makeText(LogInActivity.this, "Rellena todos los datos", Toast.LENGTH_SHORT).show();
             } else{
                 User userLogIn = new User(inputNombre.getText().toString(),inputTelef.getText().toString(), inputPassword.getText().toString());
-                if (users.equals(userLogIn)){
+                if (users.contains(userLogIn)){
+                    MyApplication.currentUser = userLogIn;
                     Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else{
