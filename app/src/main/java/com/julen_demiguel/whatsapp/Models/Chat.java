@@ -34,8 +34,9 @@ public class Chat extends RealmObject {
 
     public User getOtherUser() {
         for (User user : participants) {
-            if (user.getId() != MyApplication.currentUser.getId())
+            if (user.getId() != MyApplication.currentUser.getId()) {
                 return user;
+            }
         }
         return null;
     }

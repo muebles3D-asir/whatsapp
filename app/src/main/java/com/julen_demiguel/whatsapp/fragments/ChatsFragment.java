@@ -13,9 +13,14 @@ import android.widget.CheckBox;
 
 import com.julen_demiguel.whatsapp.Application.MyApplication;
 import com.julen_demiguel.whatsapp.Models.Chat;
+import com.julen_demiguel.whatsapp.Models.Message;
 import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.R;
 import com.julen_demiguel.whatsapp.adapters.ChatRecyclerDataAdapter;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -28,7 +33,7 @@ public class ChatsFragment extends Fragment {
     ChatRecyclerDataAdapter recyclerDataAdapter;
     Realm realm;
     RealmResults<Chat> results;
-    RealmList<Chat> userChats = new RealmList<>();
+    List<Chat> userChats = new RealmList<>();
 
     public ChatsFragment() { }
 
@@ -37,11 +42,14 @@ public class ChatsFragment extends Fragment {
         realm = Realm.getDefaultInstance();
 
         results = realm.where(Chat.class).findAll();
-        for (Chat chat: results) {
-            if(chat.getParticipants().contains(MyApplication.currentUser)){
-                userChats.add(chat);
-            }
+        if(results == null){
+            realm.beginTransaction();
+            realm.copyToRealm(getDummyData());
+            realm.commitTransaction();
+            results = realm.where(Chat.class).findAll();
         }
+        userChats.addAll(results);
+
        View view = inflater.inflate(R.layout.fragment_chats, container, false);
         recyclerView = view.findViewById(R.id.idrecyclerShowChats);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
@@ -52,5 +60,19 @@ public class ChatsFragment extends Fragment {
             }
         });
                 return view;
+    }
+
+    public Chat getDummyData(){
+        RealmList<User> usersChat = new RealmList<User>();
+        usersChat.add(MyApplication.currentUser);
+        User userExample = new User("Paco", "123456789", "Hola");
+        usersChat.add(userExample);
+        RealmList<Message> messages = new RealmList<Message>();
+        Date date = new Date();
+        Message mensaje = new Message("Hola gente", MyApplication.currentUser, date);
+        messages.add((mensaje));
+
+        Chat chat = new Chat(messages, usersChat);
+        return  chat;
     }
 }

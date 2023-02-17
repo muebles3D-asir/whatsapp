@@ -11,11 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.julen_demiguel.whatsapp.Application.MyApplication;
 import com.julen_demiguel.whatsapp.Models.Chat;
+import com.julen_demiguel.whatsapp.Models.Message;
 import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.R;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.realm.RealmResults;
@@ -69,4 +72,6 @@ public class ChatRecyclerDataAdapter extends RecyclerView.Adapter<ChatRecyclerDa
     public interface  OnItemClickListener {
         public void onItemClick(int position);
     }
+
+
 }
