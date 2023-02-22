@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".activities.MainActivity">
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/Toolbar"
         android:layout_width="match_parent"
@@ -17,8 +16,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:titleTextColor="@color/white"
-        app:subtitleTextColor="@color/black"
-       />
+        app:subtitleTextColor="@color/black" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -27,12 +25,22 @@
         android:background="@color/Whatsapp"
         app:tabIconTint="@color/white"
         app:tabIndicatorColor="@color/white"
-        app:tabTextColor="@color/white"
-        />
+        app:tabTextColor="@color/white" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck"></androidx.viewpager.widget.ViewPager>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/idbtnNewChat"
@@ -43,23 +51,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/buscar"
             app:backgroundTint="@color/Whatsapp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecyclerChats"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck">
-
-        </androidx.viewpager.widget.ViewPager>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.julen_demiguel.whatsapp.Models;
 
 import com.julen_demiguel.whatsapp.Application.MyApplication;
+import com.julen_demiguel.whatsapp.R;
 
 import java.io.Serializable;
 
@@ -16,7 +17,7 @@ public class User extends RealmObject implements Serializable {
     private String password;
     private String telef;
 
-    public User(){}
+    public User() {}
 
     public User(String name, String telef ) {
         this.id = MyApplication.userID.incrementAndGet();
@@ -29,12 +30,6 @@ public class User extends RealmObject implements Serializable {
     public User(String name,  String telef, String password) {
         this(name, telef);
         this.password = password;
-        this.img = 0;
-    }
-
-    public User(String name,  String telef, String password, String img) {
-        this(name, telef, password);
-        this.img = 0;
     }
 
     public int getImg() {
@@ -63,6 +58,14 @@ public class User extends RealmObject implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getTelef() {
+        return telef;
+    }
+
+    public void setTelef(String telef) {
+        this.telef = telef;
     }
 
     @Override

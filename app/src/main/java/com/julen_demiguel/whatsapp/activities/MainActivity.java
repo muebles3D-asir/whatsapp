@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     MyViewPagerAdapter myViewPagerAdapter;
     FloatingActionButton fab;
     RecyclerView recyclerView;
-    ChatRecyclerDataAdapter chatRecyclerAdapter;
     List<Chat> chats = new RealmList<>();
     RealmResults<Chat> results;
     @Override
@@ -47,14 +46,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         realm = Realm.getDefaultInstance();
-        recyclerView = findViewById(R.id.RecyclerChats);
         fab = findViewById(R.id.idbtnNewChat);
-        // Prueba de cambio (Álvaro)
+
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.comunidad));
         tabLayout.addTab(tabLayout.newTab().setText("Chats"));
         tabLayout.addTab(tabLayout.newTab().setText("Estados"));
         tabLayout.addTab(tabLayout.newTab().setText("Llamadas"));
+
         LinearLayout layout = ((LinearLayout) ((LinearLayout) tabLayout.getChildAt(0)).getChildAt(0));
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) layout.getLayoutParams();
         layoutParams.weight = 0.5f; // e.g. 0.5f
@@ -96,26 +95,18 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
+            public void onTabUnselected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 1) {
+
+                }
+            }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
-        results = realm.where(Chat.class).findAll();
-        if(results.size() > 0) {
-            chats.clear();
-            chats.addAll(realm.copyFromRealm(results));
-        }
-        chatRecyclerAdapter = new ChatRecyclerDataAdapter(chats, new ChatRecyclerDataAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
 
-            }
-        });
-        recyclerView.setAdapter(chatRecyclerAdapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,1));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

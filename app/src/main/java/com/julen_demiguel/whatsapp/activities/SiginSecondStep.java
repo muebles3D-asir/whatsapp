@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class SiginSecondStep extends AppCompatActivity {
     User usuarioRegistro;
@@ -24,6 +25,9 @@ public class SiginSecondStep extends AppCompatActivity {
     EditText passwordRepeat;
     Random random = new Random();
     Realm realm;
+    RealmResults<User> results;
+
+    ArrayList<User> users = new ArrayList<User>();
     int[] imgs ={ R.drawable.perfil1, R.drawable.perfil2, R.drawable.perfil3, R.drawable.perfil4, R.drawable.perfil5, R.drawable.perfil6 };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +41,36 @@ public class SiginSecondStep extends AppCompatActivity {
         passwordRepeat = (EditText) findViewById(R.id.etRepeatPassword);
         botonRegistrarse.setOnClickListener(v -> {
             if (password.getText().length() == 0 || passwordRepeat.getText().length() == 0) {
-                Toast.makeText(SiginSecondStep.this, "Debes rellenar los campos porfavor", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SiginSecondStep.this, "Por favor, rellena todos los campos :))", Toast.LENGTH_SHORT).show();
             } else {
                 if (password.getText().toString().equals(passwordRepeat.getText().toString())) {
                     usuarioRegistro.setPassword(password.getText().toString());
                     usuarioRegistro.setImg(imgs[random.nextInt(imgs.length)]);
-
                     realm = Realm.getDefaultInstance();
-                    realm.beginTransaction();
-                    realm.copyToRealmOrUpdate(usuarioRegistro);
-                    realm.commitTransaction();
+                    results = realm.where(User.class).findAll();
+                    users.addAll(realm.copyFromRealm(results));
+                    boolean usuarioExistente = false;
+                    for (User u : users) {
+                        if (u.getTelef().equals(usuarioRegistro.getTelef())) {
+                           usuarioExistente = true;
+                            break;
+                        } else if (u.getPassword().equals(usuarioRegistro.getPassword())) {
+                          usuarioExistente = true;
+                            break;
+                        }
+                    }
+                    if(usuarioExistente) {
+                        realm.beginTransaction();
+                        realm.copyToRealmOrUpdate(usuarioRegistro);
+                        realm.commitTransaction();
+                    } else {
+                        Toast.makeText(this, "El usuario asociado a ese número de telefono ya esta registrado!!>:V", Toast.LENGTH_SHORT).show();
+                    }
 
                     Intent intent1 = new Intent(SiginSecondStep.this, LogInActivity.class);
                     startActivity(intent1);
                 } else {
-                    Toast.makeText(SiginSecondStep.this, "Las contraseñas no coinciden!!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SiginSecondStep.this, "Las contraseñas no coinciden!!!! >.V", Toast.LENGTH_SHORT).show();
                 }
             }
         });

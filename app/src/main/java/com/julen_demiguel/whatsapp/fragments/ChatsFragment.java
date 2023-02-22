@@ -53,13 +53,15 @@ public class ChatsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_chats, container, false);
         recyclerView = view.findViewById(R.id.idrecyclerShowChats);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+
         recyclerDataAdapter = new ChatRecyclerDataAdapter(userChats, new ChatRecyclerDataAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
 
             }
         });
+        recyclerView.setAdapter(recyclerDataAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         return view;
     }
 
