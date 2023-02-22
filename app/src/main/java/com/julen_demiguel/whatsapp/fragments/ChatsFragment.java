@@ -35,14 +35,15 @@ public class ChatsFragment extends Fragment {
     RealmResults<Chat> results;
     List<Chat> userChats = new RealmList<>();
 
-    public ChatsFragment() { }
+    public ChatsFragment() {
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         realm = Realm.getDefaultInstance();
 
         results = realm.where(Chat.class).findAll();
-        if(results == null){
+        if (results.size() == 0) {
             realm.beginTransaction();
             realm.copyToRealm(getDummyData());
             realm.commitTransaction();
@@ -50,7 +51,7 @@ public class ChatsFragment extends Fragment {
         }
         userChats.addAll(results);
 
-       View view = inflater.inflate(R.layout.fragment_chats, container, false);
+        View view = inflater.inflate(R.layout.fragment_chats, container, false);
         recyclerView = view.findViewById(R.id.idrecyclerShowChats);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         recyclerDataAdapter = new ChatRecyclerDataAdapter(userChats, new ChatRecyclerDataAdapter.OnItemClickListener() {
@@ -59,10 +60,10 @@ public class ChatsFragment extends Fragment {
 
             }
         });
-                return view;
+        return view;
     }
 
-    public Chat getDummyData(){
+    public Chat getDummyData() {
         RealmList<User> usersChat = new RealmList<User>();
         usersChat.add(MyApplication.currentUser);
         User userExample = new User("Paco", "123456789", "Hola");
@@ -73,6 +74,6 @@ public class ChatsFragment extends Fragment {
         messages.add((mensaje));
 
         Chat chat = new Chat(messages, usersChat);
-        return  chat;
+        return chat;
     }
 }
