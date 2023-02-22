@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.R;
@@ -42,12 +43,12 @@ public class ContactsActivity extends AppCompatActivity {
             users.clear();
             users.addAll(realm.copyFromRealm(results));
         }
-        /*contactRecyclerAdapter = new ContactRecyclerAdapter(users, new ContactRecyclerAdapter.OnItemClickListener() {
+        contactRecyclerAdapter = new ContactRecyclerAdapter(results, new ContactRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                Toast.makeText(ContactsActivity.this, results.get(position).getName(), Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
         recyclerView.setAdapter(contactRecyclerAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this,1));
