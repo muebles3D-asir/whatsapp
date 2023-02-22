@@ -42,12 +42,12 @@ public class ContactsActivity extends AppCompatActivity {
             users.clear();
             users.addAll(realm.copyFromRealm(results));
         }
-        /*contactRecyclerAdapter = new ContactRecyclerAdapter(users, new ContactRecyclerAdapter.OnItemClickListener() {
+        contactRecyclerAdapter = new ContactRecyclerAdapter(results, new ContactRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
 
             }
-        });*/
+        });
 
         recyclerView.setAdapter(contactRecyclerAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this,1));
