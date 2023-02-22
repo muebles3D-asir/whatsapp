@@ -1,31 +1,54 @@
 package com.julen_demiguel.whatsapp.activities;
 
-import androidx.activity.OnBackPressedDispatcherOwner;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.julen_demiguel.whatsapp.Models.Chat;
+import com.julen_demiguel.whatsapp.Models.User;
+import com.julen_demiguel.whatsapp.adapters.ChatRecyclerDataAdapter;
+import com.julen_demiguel.whatsapp.adapters.ContactRecyclerAdapter;
 import com.julen_demiguel.whatsapp.adapters.MyViewPagerAdapter;
 import com.julen_demiguel.whatsapp.R;
 import com.julen_demiguel.whatsapp.fragments.ChatsFragment;
+
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     androidx.appcompat.widget.Toolbar toolbar;
     ViewPager viewPager;
+    Realm realm;
     MyViewPagerAdapter myViewPagerAdapter;
+    FloatingActionButton fab;
+    RecyclerView recyclerView;
+    ChatRecyclerDataAdapter chatRecyclerAdapter;
+    List<Chat> chats = new RealmList<>();
+    RealmResults<Chat> results;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        realm = Realm.getDefaultInstance();
+        recyclerView = findViewById(R.id.RecyclerChats);
+        fab = findViewById(R.id.idbtnNewChat);
         // Prueba de cambio (Álvaro)
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.comunidad));
@@ -37,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         layoutParams.weight = 0.5f; // e.g. 0.5f
         layout.setLayoutParams(layoutParams);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.Toolbar);
         toolbar.setTitle("Whatsapp");
         setSupportActionBar(toolbar);
 
@@ -80,6 +103,32 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        results = realm.where(Chat.class).findAll();
+        if(results.size() > 0) {
+            chats.clear();
+            chats.addAll(realm.copyFromRealm(results));
+        }
+        chatRecyclerAdapter = new ChatRecyclerDataAdapter(chats, new ChatRecyclerDataAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        });
+        recyclerView.setAdapter(chatRecyclerAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,1));
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Prueba", Toast.LENGTH_SHORT).show();
+                Intent ToTouched = new Intent(MainActivity.this, ContactsActivity.class);
+                try {
+                    startActivity(ToTouched);
+                } catch (Exception e){
+                    Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
     }
 
@@ -107,4 +156,5 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }

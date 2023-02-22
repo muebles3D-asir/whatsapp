@@ -9,7 +9,7 @@
 
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/Toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -41,7 +41,13 @@
             android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/buscar" />
+            app:srcCompat="@drawable/buscar"
+            app:backgroundTint="@color/Whatsapp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerChats"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
