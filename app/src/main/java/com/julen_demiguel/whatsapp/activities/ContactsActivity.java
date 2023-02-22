@@ -43,12 +43,7 @@ public class ContactsActivity extends AppCompatActivity {
             users.clear();
             users.addAll(realm.copyFromRealm(results));
         }
-        contactRecyclerAdapter = new ContactRecyclerAdapter(results, new ContactRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Toast.makeText(ContactsActivity.this, results.get(position).getName(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        contactRecyclerAdapter = new ContactRecyclerAdapter(results, position -> Toast.makeText(ContactsActivity.this, results.get(position).getName(), Toast.LENGTH_SHORT).show());
 
         recyclerView.setAdapter(contactRecyclerAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this,1));

@@ -4,20 +4,15 @@ import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.ImageView;
-        import android.widget.LinearLayout;
-        import android.widget.TextView;
+import android.widget.TextView;
 
         import androidx.annotation.NonNull;
         import androidx.recyclerview.widget.RecyclerView;
 
-        import com.julen_demiguel.whatsapp.Models.Chat;
-        import com.julen_demiguel.whatsapp.Models.User;
+import com.julen_demiguel.whatsapp.Models.User;
         import com.julen_demiguel.whatsapp.R;
 
-        import java.util.ArrayList;
-        import java.util.List;
-
-        import io.realm.RealmResults;
+import java.util.List;
 
 public class ContactRecyclerAdapter  extends RecyclerView.Adapter<ContactRecyclerAdapter.RecyclerDataHolder>{
     private List<User> contacts;
@@ -31,7 +26,7 @@ public class ContactRecyclerAdapter  extends RecyclerView.Adapter<ContactRecycle
     @NonNull
     @Override
     public ContactRecyclerAdapter.RecyclerDataHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.show_users, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item, parent, false);
         return new ContactRecyclerAdapter.RecyclerDataHolder(view);
     }
 

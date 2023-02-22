@@ -24,7 +24,6 @@ import io.realm.RealmResults;
 public class LogInActivity extends AppCompatActivity {
     Realm realm;
     private boolean esVisible;
-    EditText inputNombre;
     EditText inputPassword;
     EditText inputTelef;
     Button login;
@@ -36,8 +35,7 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        login = (Button) findViewById(R.id.btn_login); 
-        inputNombre = (EditText) findViewById(R.id.et_name);
+        login = (Button) findViewById(R.id.btn_login);
         inputTelef = (EditText) findViewById(R.id.et_phone);
         inputPassword = (EditText) findViewById(R.id.et_password);
 
@@ -65,20 +63,19 @@ public class LogInActivity extends AppCompatActivity {
         });
         
         login.setOnClickListener(v -> {
-            if(inputNombre.getText().length() == 0 || inputTelef.getText().length() == 0 || inputPassword.getText().length() == 0){
+            if (inputTelef.getText().length() == 0 || inputPassword.getText().length() == 0){
                 Toast.makeText(LogInActivity.this, "Rellena todos los datos", Toast.LENGTH_SHORT).show();
             } else{
-                User userLogIn = new User(inputNombre.getText().toString(),inputTelef.getText().toString(), inputPassword.getText().toString());
-                if (users.contains(userLogIn)){
+                User userLogIn = realm.where(User.class).equalTo("telef", inputTelef.getText().toString()).findFirst();
+                if (userLogIn.getPassword() == inputPassword.getText().toString()) {
                     MyApplication.currentUser = userLogIn;
                     Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else{
-                    Toast.makeText(LogInActivity.this, "Ese un usario con existe", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LogInActivity.this, "Ese usuario no existe", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
 
     public void onButtonClick(View view) {

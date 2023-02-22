@@ -5,23 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.julen_demiguel.whatsapp.Application.MyApplication;
 import com.julen_demiguel.whatsapp.Models.Chat;
-import com.julen_demiguel.whatsapp.Models.Message;
 import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.R;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import io.realm.RealmResults;
 
 public class ChatRecyclerDataAdapter extends RecyclerView.Adapter<ChatRecyclerDataAdapter.RecyclerDataHolder>{
     private List<Chat> chats;
@@ -35,7 +28,7 @@ public class ChatRecyclerDataAdapter extends RecyclerView.Adapter<ChatRecyclerDa
     @NonNull
     @Override
     public ChatRecyclerDataAdapter.RecyclerDataHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.showchat, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_item, parent, false);
         return new RecyclerDataHolder(view);
     }
 

@@ -21,9 +21,9 @@
         android:layout_width="315dp"
         android:layout_height="47dp"
         android:layout_marginTop="88dp"
+        android:inputType="textPassword"
         android:hint="Contraseña"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -32,9 +32,9 @@
         android:layout_width="318dp"
         android:layout_height="51dp"
         android:layout_marginTop="36dp"
+        android:inputType="textPassword"
         android:hint="Repetir Contraseña"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
