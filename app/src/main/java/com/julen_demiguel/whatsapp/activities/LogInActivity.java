@@ -44,21 +44,20 @@ public class LogInActivity extends AppCompatActivity {
         visibleCkeck = (CheckBox) findViewById(R.id.idMostContraseña);
         results = realm.where(User.class).findAll();
 
-        if(results.size() > 0) {
+        if (results.size() > 0) {
             users.clear();
             users.addAll(realm.copyFromRealm(results));
         }
 
         visibleCkeck.setOnClickListener(v -> {
-            if(!esVisible) {
+            if (!esVisible) {
                 inputPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 esVisible = true;
-                ///aqui puedes cambiar el texto del boton, o textview, o cambiar la imagen de un imageView.
-            }
-            else {
+                // Aqui puedes cambiar el texto del boton, o textview, o cambiar la imagen de un imageView.
+            } else {
                 inputPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 esVisible = false;
-                ///aqui puedes cambiar el texto del boton, o textview, o cambiar la imagen de un imageView.
+                // Aqui puedes cambiar el texto del boton, o textview, o cambiar la imagen de un imageView.
             }
         });
         
@@ -67,7 +66,7 @@ public class LogInActivity extends AppCompatActivity {
                 Toast.makeText(LogInActivity.this, "Rellena todos los datos", Toast.LENGTH_SHORT).show();
             } else{
                 User userLogIn = realm.where(User.class).equalTo("telef", inputTelef.getText().toString()).findFirst();
-                if (userLogIn.getPassword() == inputPassword.getText().toString()) {
+                if (userLogIn.getPassword().equals(inputPassword.getText().toString())) {
                     MyApplication.currentUser = userLogIn;
                     Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                     startActivity(intent);
