@@ -5,11 +5,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.R;
-import com.julen_demiguel.whatsapp.adapters.ContactRecyclerAdapter;
+import com.julen_demiguel.whatsapp.adapters.ContactRecyclerDataAdapter;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ import io.realm.RealmResults;
 public class ContactsActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ContactRecyclerAdapter contactRecyclerAdapter;
+    ContactRecyclerDataAdapter contactRecyclerAdapter;
     Realm realm;
     androidx.appcompat.widget.Toolbar toolbar;
     List<User> users = new RealmList<>();
@@ -33,17 +34,25 @@ public class ContactsActivity extends AppCompatActivity {
         realm = Realm.getDefaultInstance();
 
         toolbar = findViewById(R.id.ContactsToolbar);
-        toolbar.setTitle("Whatsapp");
+        toolbar.setTitle("Contactos");
         setSupportActionBar(toolbar);
         toolbar.getMenu().clear();
         toolbar.inflateMenu(R.menu.community_menu);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
 
         results = realm.where(User.class).findAll();
         if(results.size() > 0) {
             users.clear();
             users.addAll(realm.copyFromRealm(results));
         }
-        contactRecyclerAdapter = new ContactRecyclerAdapter(results, position -> Toast.makeText(ContactsActivity.this, results.get(position).getName(), Toast.LENGTH_SHORT).show());
+        contactRecyclerAdapter = new ContactRecyclerDataAdapter(results, position -> {
+            Toast.makeText(ContactsActivity.this, results.get(position).getName(), Toast.LENGTH_SHORT).show();
+        });
 
         recyclerView.setAdapter(contactRecyclerAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this,1));

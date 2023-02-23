@@ -1,7 +1,10 @@
 package com.julen_demiguel.whatsapp.fragments;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,8 +37,19 @@ public class ChatsFragment extends Fragment {
     Realm realm;
     RealmResults<Chat> results;
     List<Chat> userChats = new RealmList<>();
+    private ChatListener callback;
 
-    public ChatsFragment() {
+    public ChatsFragment() { }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        try {
+            callback = (ChatListener) context;
+        }catch (Exception e){
+            throw new ClassCastException(context.toString() + "should implement DataListener");
+        }
     }
 
     @Override
@@ -49,6 +63,10 @@ public class ChatsFragment extends Fragment {
             realm.commitTransaction();
             results = realm.where(Chat.class).findAll();
         }
+        // TODO: MODIFICAR ESTO
+//        for (result : results){
+//            if (result.)
+//        }
         userChats.addAll(results);
 
         View view = inflater.inflate(R.layout.fragment_chats, container, false);
@@ -57,7 +75,7 @@ public class ChatsFragment extends Fragment {
         recyclerDataAdapter = new ChatRecyclerDataAdapter(userChats, new ChatRecyclerDataAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                callback.openChat(results.get(position).getId());
             }
         });
         recyclerView.setAdapter(recyclerDataAdapter);
@@ -77,5 +95,9 @@ public class ChatsFragment extends Fragment {
 
         Chat chat = new Chat(messages, usersChat);
         return chat;
+    }
+
+    public interface ChatListener {
+        public void openChat(int id);
     }
 }

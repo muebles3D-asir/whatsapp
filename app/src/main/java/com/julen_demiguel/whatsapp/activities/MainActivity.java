@@ -12,24 +12,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.julen_demiguel.whatsapp.R;
+
 import com.julen_demiguel.whatsapp.Models.Chat;
 import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.adapters.ChatRecyclerDataAdapter;
-import com.julen_demiguel.whatsapp.adapters.ContactRecyclerAdapter;
+import com.julen_demiguel.whatsapp.adapters.ContactRecyclerDataAdapter;
 import com.julen_demiguel.whatsapp.adapters.MyViewPagerAdapter;
-import com.julen_demiguel.whatsapp.R;
 import com.julen_demiguel.whatsapp.fragments.ChatsFragment;
 
 import java.util.List;
-
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ChatsFragment.ChatListener {
 
     TabLayout tabLayout;
     androidx.appcompat.widget.Toolbar toolbar;
@@ -137,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_nuevoGrupo:
                 return true;
@@ -146,6 +144,14 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void openChat(int id) {
+//        Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+//        intent.putExtra("id", id);
+//        startActivity(intent);
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
     }
 
 }

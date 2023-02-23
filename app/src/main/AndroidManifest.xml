@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.julen_demiguel.whatsapp">
+    package="com.julen_demiguel.whatsapp" >
 
     <application
         android:name=".Application.MyApplication"
@@ -13,13 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsApp"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".Chat"
+            android:exported="false" />
+        <activity
+            android:name=".chat"
+            android:exported="false" />
         <activity
             android:name=".activities.ContactsActivity"
             android:exported="false" />
         <activity
             android:name=".activities.LogInActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,13 +34,13 @@
         </activity>
         <activity
             android:name=".activities.SignInActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activities.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activities.SiginSecondStep"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

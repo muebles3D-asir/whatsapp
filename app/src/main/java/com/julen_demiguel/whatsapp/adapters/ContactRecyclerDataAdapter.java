@@ -14,20 +14,20 @@ import com.julen_demiguel.whatsapp.Models.User;
 
 import java.util.List;
 
-public class ContactRecyclerAdapter  extends RecyclerView.Adapter<ContactRecyclerAdapter.RecyclerDataHolder>{
+public class ContactRecyclerDataAdapter extends RecyclerView.Adapter<ContactRecyclerDataAdapter.RecyclerDataHolder>{
     private List<User> contacts;
     private OnItemClickListener listener;
 
-    public ContactRecyclerAdapter (List<User> contacts, OnItemClickListener listener) {
+    public ContactRecyclerDataAdapter(List<User> contacts, OnItemClickListener listener) {
         this.contacts = contacts;
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public ContactRecyclerAdapter.RecyclerDataHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ContactRecyclerDataAdapter.RecyclerDataHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item, parent, false);
-        return new ContactRecyclerAdapter.RecyclerDataHolder(view);
+        return new ContactRecyclerDataAdapter.RecyclerDataHolder(view);
     }
 
     @Override
@@ -40,6 +40,8 @@ public class ContactRecyclerAdapter  extends RecyclerView.Adapter<ContactRecycle
         return contacts.size();
     }
 
+
+
     public class RecyclerDataHolder extends RecyclerView.ViewHolder {
         ImageView imgContact;
         TextView txtNombre;
@@ -50,7 +52,7 @@ public class ContactRecyclerAdapter  extends RecyclerView.Adapter<ContactRecycle
             txtNombre = itemView.findViewById(R.id.lblNombreUser);
         }
 
-        public void  asignData(User contact, ContactRecyclerAdapter.OnItemClickListener listener){
+        public void  asignData(User contact, ContactRecyclerDataAdapter.OnItemClickListener listener){
             imgContact.setImageResource(contact.getImg());
             txtNombre.setText(contact.getName());
             itemView.setOnClickListener(view -> listener.onItemClick(getAdapterPosition()));
