@@ -7,33 +7,33 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.julen_demiguel.whatsapp.Models.Message;
 import com.julen_demiguel.whatsapp.R;
 
 import java.util.List;
 
-class MessageRecyclerDataAdapter extends RecyclerView.Adapter<MessageRecyclerDataAdapter.ViewHolder> {
+public class MessageRecyclerDataAdapter extends RecyclerView.Adapter<MessageRecyclerDataAdapter.ViewHolder> {
 
-    private List<String> messages;
+    private List<Message> messages;
 
-    public MessageRecyclerDataAdapter(List<String> messages) {
+    public MessageRecyclerDataAdapter(List<Message> messages) {
         this.messages = messages;
     }
 
-    public void addMessage(String message) {
+    public void addMessage(Message message) {
         messages.add(message);
         notifyItemInserted(messages.size() - 1);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_chat, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_chat, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String message = messages.get(position);
+        String message = messages.get(position).getText();
         holder.tvMessage.setText(message);
     }
 

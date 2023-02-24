@@ -35,6 +35,7 @@ public class ChatsFragment extends Fragment {
     RecyclerView recyclerView;
     ChatRecyclerDataAdapter recyclerDataAdapter;
     Realm realm;
+    Chat chatVacio = new Chat();
     RealmResults<Chat> results;
     List<Chat> userChats = new RealmList<>();
     private ChatListener callback;
@@ -63,10 +64,11 @@ public class ChatsFragment extends Fragment {
             realm.commitTransaction();
             results = realm.where(Chat.class).findAll();
         }
-        // TODO: MODIFICAR ESTO
+        // TODO: MODIFICAR ESTO (Filtrar los chats)
 //        for (result : results){
 //            if (result.)
 //        }
+
         userChats.addAll(results);
 
         View view = inflater.inflate(R.layout.fragment_chats, container, false);

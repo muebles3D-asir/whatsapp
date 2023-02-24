@@ -19,11 +19,11 @@ public class User extends RealmObject implements Serializable {
 
     public User() {}
 
-    public User(String telef, String password ) {
+    public User(String name, String telef) {
         this.id = MyApplication.userID.incrementAndGet();
-        this.name = "";
+        this.name = name;
         this.telef = telef;
-        this.password = password;
+        this.password = "";
         this.img = 0;
     }
 

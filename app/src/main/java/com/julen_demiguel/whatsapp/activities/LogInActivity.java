@@ -66,7 +66,7 @@ public class LogInActivity extends AppCompatActivity {
                 Toast.makeText(LogInActivity.this, "Rellena todos los datos", Toast.LENGTH_SHORT).show();
             } else{
                 User userLogIn = realm.where(User.class).equalTo("telef", inputTelef.getText().toString()).findFirst();
-                if (userLogIn.getPassword().equals(inputPassword.getText().toString())) {
+                if (userLogIn != null && userLogIn.getPassword().equals(inputPassword.getText().toString())) {
                     MyApplication.currentUser = userLogIn;
                     Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                     startActivity(intent);
