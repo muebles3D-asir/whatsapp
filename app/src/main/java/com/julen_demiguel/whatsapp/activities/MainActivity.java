@@ -77,12 +77,33 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
                         toolbar.inflateMenu(R.menu.community_menu);
                         break;
                     case  1:
+                        fab.setImageDrawable(getResources().getDrawable(R.drawable.buscar));
                         toolbar.getMenu().clear();
                         toolbar.inflateMenu(R.menu.chats_menu);
+                        fab.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(MainActivity.this, "Prueba", Toast.LENGTH_SHORT).show();
+                                Intent ToTouched = new Intent(MainActivity.this, ContactsActivity.class);
+                                try {
+                                    startActivity(ToTouched);
+                                } catch (Exception e){
+                                    Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        });
                         break;
                     case 2:
+                        fab.setImageDrawable(getResources().getDrawable(R.drawable.camara));
                         toolbar.getMenu().clear();
                         toolbar.inflateMenu(R.menu.estados_menu);
+                        fab.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(MainActivity.this, "Camara", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                         break;
                     case 3:
                         toolbar.getMenu().clear();
@@ -106,19 +127,7 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
             }
         });
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Prueba", Toast.LENGTH_SHORT).show();
-                Intent ToTouched = new Intent(MainActivity.this, ContactsActivity.class);
-                try {
-                    startActivity(ToTouched);
-                } catch (Exception e){
-                    Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
-                }
 
-            }
-        });
 
     }
 

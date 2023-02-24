@@ -59,7 +59,7 @@ public class SiginSecondStep extends AppCompatActivity {
                             break;
                         }
                     }
-                    if(usuarioExistente) {
+                    if(!usuarioExistente) {
                         realm.beginTransaction();
                         realm.copyToRealmOrUpdate(usuarioRegistro);
                         realm.commitTransaction();
