@@ -27,7 +27,7 @@ public class MessageRecyclerDataAdapter extends RecyclerView.Adapter<MessageRecy
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_chat, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_estructure, parent, false);
         return new ViewHolder(view);
     }
 
@@ -48,7 +48,7 @@ public class MessageRecyclerDataAdapter extends RecyclerView.Adapter<MessageRecy
 
         public ViewHolder(View view) {
             super(view);
-            tvMessage = view.findViewById(R.id.etMessage);
+            tvMessage = view.findViewById(R.id.idlblMensajeShow);
         }
     }
 }
