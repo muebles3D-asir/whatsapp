@@ -62,6 +62,20 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
         toolbar.setTitle("Whatsapp");
         setSupportActionBar(toolbar);
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Prueba", Toast.LENGTH_SHORT).show();
+                Intent ToTouched = new Intent(MainActivity.this, ContactsActivity.class);
+                try {
+                    startActivity(ToTouched);
+                } catch (Exception e){
+                    Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(myViewPagerAdapter);
@@ -106,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
                         });
                         break;
                     case 3:
+                        fab.setImageDrawable(getResources().getDrawable(R.drawable.llamada_de_emergencia));
                         toolbar.getMenu().clear();
                         toolbar.inflateMenu(R.menu.llamadas_menu);
                         break;

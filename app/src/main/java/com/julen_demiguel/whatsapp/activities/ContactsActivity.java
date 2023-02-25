@@ -38,10 +38,13 @@ public class ContactsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.getMenu().clear();
         toolbar.inflateMenu(R.menu.community_menu);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                onBackPressed();
             }
         });
 
