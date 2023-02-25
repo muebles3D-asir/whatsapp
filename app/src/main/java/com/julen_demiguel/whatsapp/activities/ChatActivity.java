@@ -14,15 +14,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.julen_demiguel.whatsapp.Application.MyApplication;
 import com.julen_demiguel.whatsapp.Models.Chat;
 import com.julen_demiguel.whatsapp.Models.Message;
 import com.julen_demiguel.whatsapp.R;
 import com.julen_demiguel.whatsapp.adapters.MessageRecyclerDataAdapter;
 import com.julen_demiguel.whatsapp.fragments.ChatsFragment;
 
+import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
@@ -37,12 +40,20 @@ public class ChatActivity extends AppCompatActivity {
     Realm realm;
     Chat chat;
     int id;
+    EditText mensaje;
+    Date date = new Date();
+
+    Button botonSend;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         realm = Realm.getDefaultInstance();
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .allowWritesOnUiThread(true)
+                .build();
 
         try{
             Bundle bundle = getIntent().getExtras();
@@ -51,6 +62,8 @@ public class ChatActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(chat.getOtherUser().getName());
         } catch (NullPointerException e ){}
 
+        mensaje = findViewById(R.id.etMessage);
+        botonSend = findViewById(R.id.btnSend);
         toolbar = findViewById(R.id.chatToolbar);
         toolbar.setTitle(chat.getOtherUser().getName());
         setSupportActionBar(toolbar);
@@ -62,6 +75,22 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent toMain = new Intent(ChatActivity.this,MainActivity.class);
                 startActivity(toMain);
+            }
+        });
+
+        botonSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mensaje.getText().length() > 0){
+                    Message newMessage = new Message(mensaje.getText().toString(), MyApplication.currentUser, date);
+                    realm.executeTransactionAsync(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            Message newMessage = new Message(mensaje.getText().toString(), MyApplication.currentUser, date);
+                            chat.getMessages().add(newMessage);
+                        }
+                    });
+                }
             }
         });
 
