@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.R;
+import com.julen_demiguel.whatsapp.adapters.ChatRecyclerDataAdapter;
 import com.julen_demiguel.whatsapp.adapters.ContactRecyclerDataAdapter;
+import com.julen_demiguel.whatsapp.fragments.ChatsFragment;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class ContactsActivity extends AppCompatActivity {
     androidx.appcompat.widget.Toolbar toolbar;
     List<User> users = new RealmList<>();
     RealmResults<User> results;
+    private ChatListener callback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +36,13 @@ public class ContactsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.RecyclerUsers);
         realm = Realm.getDefaultInstance();
 
+
         toolbar = findViewById(R.id.ContactsToolbar);
         toolbar.setTitle("Contactos");
         setSupportActionBar(toolbar);
         toolbar.getMenu().clear();
         toolbar.inflateMenu(R.menu.community_menu);
-        if (getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -48,17 +52,25 @@ public class ContactsActivity extends AppCompatActivity {
             }
         });
 
+
         results = realm.where(User.class).findAll();
-        if(results.size() > 0) {
+        if (results.size() > 0) {
             users.clear();
             users.addAll(realm.copyFromRealm(results));
         }
-        contactRecyclerAdapter = new ContactRecyclerDataAdapter(results, position -> {
-            Toast.makeText(ContactsActivity.this, results.get(position).getName(), Toast.LENGTH_SHORT).show();
+        contactRecyclerAdapter = new ContactRecyclerDataAdapter(results, new ContactRecyclerDataAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
         });
 
-        recyclerView.setAdapter(contactRecyclerAdapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,1));
-    }
+                recyclerView.setAdapter(contactRecyclerAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
 
+
+    }
+    public interface ChatListener {
+        public void openChat(int id);
+    }
 }

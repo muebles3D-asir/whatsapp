@@ -7,13 +7,13 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/imgFotoDePerfilShow"
+        android:id="@+id/imgShowInChat"
         android:layout_width="106dp"
         android:layout_height="88dp"
         app:srcCompat="@drawable/perfil1" />
 
     <TextView
-        android:id="@+id/lblNombreUser"
+        android:id="@+id/nameShowInChat"
         android:layout_width="299dp"
         android:layout_height="88dp"
         android:layout_weight="1"

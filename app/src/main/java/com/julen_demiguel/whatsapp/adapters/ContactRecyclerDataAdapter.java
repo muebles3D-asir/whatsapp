@@ -48,8 +48,8 @@ public class ContactRecyclerDataAdapter extends RecyclerView.Adapter<ContactRecy
 
         public RecyclerDataHolder(@NonNull View itemView) {
             super(itemView);
-            imgContact = itemView.findViewById(R.id.imgFotoDePerfilShow);
-            txtNombre = itemView.findViewById(R.id.lblNombreUser);
+            imgContact = itemView.findViewById(R.id.imgShowInChat);
+            txtNombre = itemView.findViewById(R.id.nameShowInChat);
         }
 
         public void  asignData(User contact, ContactRecyclerDataAdapter.OnItemClickListener listener){

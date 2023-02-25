@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Prueba", Toast.LENGTH_SHORT).show();
+
                 Intent ToTouched = new Intent(MainActivity.this, ContactsActivity.class);
                 try {
                     startActivity(ToTouched);
@@ -141,9 +141,7 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
 
             }
         });
-
-
-
+        
     }
 
     @Override
@@ -175,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
         Intent intent = new Intent(MainActivity.this, ChatActivity.class);
         intent.putExtra("id", id);
         startActivity(intent);
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, id+"", Toast.LENGTH_SHORT).show();
     }
 
 }

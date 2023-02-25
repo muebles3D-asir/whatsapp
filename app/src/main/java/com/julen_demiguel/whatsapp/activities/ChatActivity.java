@@ -68,7 +68,8 @@ public class ChatActivity extends AppCompatActivity {
         rvChat = findViewById(R.id.rvChat);
         messages = chat.getMessages();
 
-        messageDataAdapter = new MessageRecyclerDataAdapter(messages);
+
+        messageDataAdapter = new MessageRecyclerDataAdapter(messages, chat.getOtherUser());
         rvChat.setAdapter(messageDataAdapter);
         rvChat.setLayoutManager(new GridLayoutManager(this, 1));
     }
