@@ -1,10 +1,12 @@
 package com.julen_demiguel.whatsapp.adapters;
 
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -59,6 +61,7 @@ public class ChatRecyclerDataAdapter extends RecyclerView.Adapter<ChatRecyclerDa
             txtTitulo.setText(otherUser.getName());
             txtMensaje.setText(chat.getLastMessage());
             itemView.setOnClickListener(view -> listener.onItemClick(getAdapterPosition()));
+
         }
     }
 

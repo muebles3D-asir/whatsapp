@@ -1,14 +1,17 @@
 package com.julen_demiguel.whatsapp.adapters;
 
-import android.media.Image;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.julen_demiguel.whatsapp.Application.MyApplication;
 import com.julen_demiguel.whatsapp.Models.Message;
 import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.R;
@@ -26,11 +29,6 @@ public class MessageRecyclerDataAdapter extends RecyclerView.Adapter<MessageRecy
         this.otherUserChat = userChat;
     }
 
-    public void addMessage(Message message) {
-        messages.add(message);
-        notifyItemInserted(messages.size() - 1);
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_estructure, parent, false);
@@ -39,10 +37,12 @@ public class MessageRecyclerDataAdapter extends RecyclerView.Adapter<MessageRecy
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String message = messages.get(position).getText();
+        Message message = messages.get(position);
+        String text = messages.get(position).getText();
         String name = otherUserChat.getName();
         int image = otherUserChat.getImg() == 0 ? R.drawable.perfil2 : otherUserChat.getImg();
-        holder.assignData(message, image, name);
+        int color = message.getSender().equals(MyApplication.currentUser) ? Color.parseColor("#D9FDD3") : Color.parseColor("#AAAAAA");
+        holder.assignData(text, image, name, color);
     }
 
     @Override
@@ -52,24 +52,27 @@ public class MessageRecyclerDataAdapter extends RecyclerView.Adapter<MessageRecy
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvMessage;
-        public ImageView perfilImg;
-        public TextView nameMessage;
+        TextView tvMessage;
+//        ImageView perfilImg;
+//        TextView nameMessage;
+//        LinearLayout layoutMessage;
 
         public ViewHolder(View view) {
             super(view);
             tvMessage = (TextView) view.findViewById(R.id.idlblMensajeShow);
-            perfilImg = (ImageView) view.findViewById(R.id.imgShowInChat);
-            nameMessage = (TextView) view.findViewById(R.id.nameShowInChat);
+//            perfilImg = (ImageView) view.findViewById(R.id.imgShowInChat);
+//            nameMessage = (TextView) view.findViewById(R.id.nameShowInChat);
+//            layoutMessage = (LinearLayout) view.findViewById(R.id.layoutMessage);
         }
 
-      public void assignData(String message, int image, String name) {
+        public void assignData(String message, int image, String name, int color) {
             tvMessage.setText(message);
-            if(perfilImg != null && nameMessage != null) {
-                perfilImg.setImageResource(image);
-                nameMessage.setText(name);
-            }
+//            if (perfilImg != null && nameMessage != null) {
+//                perfilImg.setImageResource(image);
+//                nameMessage.setText(name);
+//            }
 
+            itemView.setBackgroundColor(color);
         }
     }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+    android:layout_height="wrap_content"
+    android:id="@+id/layoutMessage">
 
     <TextView
         android:id="@+id/idlblMensajeShow"
@@ -10,7 +10,6 @@
         android:layout_height="53dp"
         android:layout_weight="1"
         android:textSize="18dp"
-        android:background="@android:color/darker_gray"
         android:text="TextView"
         android:textColor="#FFFFFF"/>
 </LinearLayout>
