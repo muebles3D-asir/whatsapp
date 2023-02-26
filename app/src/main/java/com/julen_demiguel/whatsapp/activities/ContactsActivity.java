@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.julen_demiguel.whatsapp.Application.MyApplication;
+import com.julen_demiguel.whatsapp.Models.Chat;
 import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.R;
 import com.julen_demiguel.whatsapp.adapters.ChatRecyclerDataAdapter;
@@ -53,7 +56,15 @@ public class ContactsActivity extends AppCompatActivity {
             users.addAll(realm.copyFromRealm(results));
         }
         contactRecyclerAdapter = new ContactRecyclerDataAdapter(results, position -> {
-
+            // TODO: ARREGLAR: No se ven los chats en el MainActivity
+            RealmList<User> usersChat = new RealmList<>();
+            usersChat.add(results.get(position));
+            usersChat.add(MyApplication.currentUser);
+            realm.beginTransaction();
+            realm.copyToRealmOrUpdate(new Chat(usersChat));
+            realm.commitTransaction();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         });
         recyclerView.setAdapter(contactRecyclerAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
