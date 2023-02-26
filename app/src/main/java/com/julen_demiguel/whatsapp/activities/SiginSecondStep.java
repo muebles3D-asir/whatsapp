@@ -27,8 +27,8 @@ public class SiginSecondStep extends AppCompatActivity {
     Realm realm;
     RealmResults<User> results;
 
-    ArrayList<User> users = new ArrayList<User>();
-    int[] imgs ={ R.drawable.perfil1, R.drawable.perfil2, R.drawable.perfil3, R.drawable.perfil4, R.drawable.perfil5, R.drawable.perfil6 };
+    ArrayList<User> users = new ArrayList<>();
+    int[] imgs = { R.drawable.perfil1, R.drawable.perfil2, R.drawable.perfil3, R.drawable.perfil4, R.drawable.perfil5, R.drawable.perfil6 };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +36,9 @@ public class SiginSecondStep extends AppCompatActivity {
         Intent intent = getIntent();
 
         usuarioRegistro = (User) intent.getSerializableExtra("usuarioRegistro");
-        botonRegistrarse = (Button) findViewById(R.id.btnSigIn);
-        password = (EditText) findViewById(R.id.etPassword);
-        passwordRepeat = (EditText) findViewById(R.id.etRepeatPassword);
+        botonRegistrarse = findViewById(R.id.btnSigIn);
+        password = findViewById(R.id.etPassword);
+        passwordRepeat = findViewById(R.id.etRepeatPassword);
         botonRegistrarse.setOnClickListener(v -> {
             if (password.getText().length() == 0 || passwordRepeat.getText().length() == 0) {
                 Toast.makeText(SiginSecondStep.this, "Por favor, rellena todos los campos :))", Toast.LENGTH_SHORT).show();
@@ -64,13 +64,13 @@ public class SiginSecondStep extends AppCompatActivity {
                         realm.copyToRealmOrUpdate(usuarioRegistro);
                         realm.commitTransaction();
                     } else {
-                        Toast.makeText(this, "El usuario asociado a ese número de telefono ya esta registrado!!>:V", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "El usuario asociado a ese número de telefono ya esta registrado!!", Toast.LENGTH_SHORT).show();
                     }
 
                     Intent intent1 = new Intent(SiginSecondStep.this, LogInActivity.class);
                     startActivity(intent1);
                 } else {
-                    Toast.makeText(SiginSecondStep.this, "Las contraseñas no coinciden!!!! >.V", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SiginSecondStep.this, "Las contraseñas no coinciden!!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

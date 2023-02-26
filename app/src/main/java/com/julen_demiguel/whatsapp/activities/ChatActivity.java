@@ -46,7 +46,7 @@ public class ChatActivity extends AppCompatActivity {
         try{
             Bundle bundle = getIntent().getExtras();
             id = bundle.getInt("id");
-            chat = (Chat) realm.where(Chat.class).equalTo("id", id).findFirst();
+            chat = realm.where(Chat.class).equalTo("id", id).findFirst();
             getSupportActionBar().setTitle(chat.getOtherUser().getName());
         } catch (NullPointerException e ){}
 
@@ -73,7 +73,7 @@ public class ChatActivity extends AppCompatActivity {
         rvChat.setLayoutManager(new GridLayoutManager(this, 1));
 
         botonSend.setOnClickListener(v -> {
-            if(etMensaje.getText().length() > 0){
+            if (etMensaje.getText().length() > 0){
                 Message newMessage = new Message(etMensaje.getText().toString(), MyApplication.currentUser, date);
                 realm.beginTransaction();
                 chat.getMessages().add(newMessage);

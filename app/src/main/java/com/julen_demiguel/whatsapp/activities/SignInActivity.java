@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.R;
 
+import io.realm.Realm;
+
 public class SignInActivity extends AppCompatActivity  {
     Button botonNextStep;
     User usuarioRegistro;
@@ -23,9 +25,10 @@ public class SignInActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sigin_fragment_step1);
-        botonNextStep = (Button) findViewById(R.id.btnNext);
-        nombre = (EditText) findViewById(R.id.IdinputNombre);
-        telefono = (EditText) findViewById(R.id.etTelefono);
+
+        botonNextStep = findViewById(R.id.btnNext);
+        nombre = findViewById(R.id.IdinputNombre);
+        telefono = findViewById(R.id.etTelefono);
 
         botonNextStep.setOnClickListener(v -> {
             if(nombre.getText().equals("") || telefono.getText().equals("")){
@@ -37,6 +40,7 @@ public class SignInActivity extends AppCompatActivity  {
                 startActivity(intent);
             }
         });
+
     }
 
 }

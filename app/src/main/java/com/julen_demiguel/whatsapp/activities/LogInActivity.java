@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.julen_demiguel.whatsapp.Application.MyApplication;
+import com.julen_demiguel.whatsapp.Models.Chat;
 import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.R;
 
@@ -29,19 +30,18 @@ public class LogInActivity extends AppCompatActivity {
     Button login;
     RealmResults<User> results;
     CheckBox visibleCkeck;
-    ArrayList<User> users = new ArrayList<User>();
+    ArrayList<User> users = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        login = (Button) findViewById(R.id.btn_login);
-        inputTelef = (EditText) findViewById(R.id.et_phone);
-        inputPassword = (EditText) findViewById(R.id.et_password);
-
+        login = findViewById(R.id.btn_login);
+        inputTelef = findViewById(R.id.et_phone);
+        inputPassword = findViewById(R.id.et_password);
 
         realm = Realm.getDefaultInstance();
-        visibleCkeck = (CheckBox) findViewById(R.id.idMostContraseña);
+        visibleCkeck = findViewById(R.id.idMostContraseña);
         results = realm.where(User.class).findAll();
 
         if (results.size() > 0) {

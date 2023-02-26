@@ -1,7 +1,6 @@
 package com.julen_demiguel.whatsapp.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 
 import com.julen_demiguel.whatsapp.Application.MyApplication;
 import com.julen_demiguel.whatsapp.Models.Chat;
@@ -21,7 +19,6 @@ import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.R;
 import com.julen_demiguel.whatsapp.adapters.ChatRecyclerDataAdapter;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,8 +32,8 @@ public class ChatsFragment extends Fragment {
     RecyclerView recyclerView;
     ChatRecyclerDataAdapter recyclerDataAdapter;
     Realm realm;
-    Chat chatVacio = new Chat();
-    RealmResults<Chat> results;
+    RealmResults<Chat> resultsChat;
+    RealmResults<User> resultsUser;
     List<Chat> userChats = new RealmList<>();
     private ChatListener callback;
 
@@ -45,61 +42,60 @@ public class ChatsFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-
+        realm = Realm.getDefaultInstance();
         try {
             callback = (ChatListener) context;
-        }catch (Exception e){
-            throw new ClassCastException(context.toString() + "should implement DataListener");
+        } catch (Exception e) {
+            throw new ClassCastException(context + "should implement DataListener");
+        }
+
+        resultsChat = realm.where(Chat.class).findAll();
+        if (resultsChat.size() == 0) {
+            realm.beginTransaction();
+            realm.copyToRealm(getDummyData(true));
+            realm.copyToRealm(getDummyData(false));
+            realm.commitTransaction();
+            resultsChat = realm.where(Chat.class).findAll();
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        realm = Realm.getDefaultInstance();
-
-        results = realm.where(Chat.class).findAll();
-        if (results.size() == 0) {
-            realm.beginTransaction();
-            realm.copyToRealm(getDummyData());
-            realm.commitTransaction();
-            results = realm.where(Chat.class).findAll();
-        }
+        resultsChat = realm.where(Chat.class).findAll();
         // TODO: MODIFICAR ESTO (Filtrar los chats)
-//        for (result : results){
-//            if (result.)
-//        }
-
-        userChats.addAll(results);
+        for (Chat chat : resultsChat) {
+            if (chat.getParticipants().contains(MyApplication.currentUser))
+                userChats.add(chat);
+        }
 
         View view = inflater.inflate(R.layout.fragment_chats, container, false);
         recyclerView = view.findViewById(R.id.idrecyclerShowChats);
 
-        recyclerDataAdapter = new ChatRecyclerDataAdapter(userChats, new ChatRecyclerDataAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                callback.openChat(results.get(position).getId());
-            }
-        });
+        recyclerDataAdapter = new ChatRecyclerDataAdapter(userChats, position -> callback.openChat(resultsChat.get(position).getId()));
         recyclerView.setAdapter(recyclerDataAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         return view;
     }
 
-    public Chat getDummyData() {
-        RealmList<User> usersChat = new RealmList<User>();
-        usersChat.add(MyApplication.currentUser);
-        User userExample = new User("Paco", "123456789", "Hola");
-        usersChat.add(userExample);
-        RealmList<Message> messages = new RealmList<Message>();
-        Date date = new Date();
-        Message mensaje = new Message("Hola gente", MyApplication.currentUser, date);
-        messages.add((mensaje));
+    private Chat getDummyData(boolean currentUser) {
+        RealmList<User> usersChat = new RealmList<>();
+        RealmList<Message> messages = new RealmList<>();
+        User userExample = new User("Paco", "123456789", "test");
+        User userExample2 = new User("Pepe", "668456978", "test");
 
+        usersChat.add(userExample);
+        Date date = new Date();
+
+        if (currentUser) usersChat.add(MyApplication.currentUser);
+        else usersChat.add(userExample2);
+
+        Message mensaje = new Message("Hola gente", userExample, date);
+        messages.add(mensaje);
         Chat chat = new Chat(messages, usersChat);
         return chat;
     }
 
     public interface ChatListener {
-        public void openChat(int id);
+        void openChat(int id);
     }
 }

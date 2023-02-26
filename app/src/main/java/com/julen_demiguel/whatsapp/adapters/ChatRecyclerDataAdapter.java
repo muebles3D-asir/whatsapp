@@ -66,7 +66,7 @@ public class ChatRecyclerDataAdapter extends RecyclerView.Adapter<ChatRecyclerDa
     }
 
     public interface  OnItemClickListener {
-        public void onItemClick(int position);
+        void onItemClick(int position);
     }
 
 

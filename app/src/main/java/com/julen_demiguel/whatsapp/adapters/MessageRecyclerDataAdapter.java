@@ -59,7 +59,7 @@ public class MessageRecyclerDataAdapter extends RecyclerView.Adapter<MessageRecy
 
         public ViewHolder(View view) {
             super(view);
-            tvMessage = (TextView) view.findViewById(R.id.idlblMensajeShow);
+            tvMessage = view.findViewById(R.id.idlblMensajeShow);
 //            perfilImg = (ImageView) view.findViewById(R.id.imgShowInChat);
 //            nameMessage = (TextView) view.findViewById(R.id.nameShowInChat);
 //            layoutMessage = (LinearLayout) view.findViewById(R.id.layoutMessage);
