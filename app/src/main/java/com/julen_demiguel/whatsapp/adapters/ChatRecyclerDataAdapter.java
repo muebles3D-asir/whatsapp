@@ -59,7 +59,10 @@ public class ChatRecyclerDataAdapter extends RecyclerView.Adapter<ChatRecyclerDa
             User otherUser = chat.getOtherUser();
             imgFoto.setImageResource(otherUser.getImg());
             txtTitulo.setText(otherUser.getName());
-            txtMensaje.setText(chat.getLastMessage());
+            String mensaje = chat.getLastMessage();
+            if(mensaje != "") {
+                txtMensaje.setText(mensaje);
+            }
             itemView.setOnClickListener(view -> listener.onItemClick(getAdapterPosition()));
 
         }

@@ -42,7 +42,12 @@ public class Chat extends RealmObject {
     }
 
     public String getLastMessage() {
-        return messages.get(messages.size()-1).getText();
+        if(messages.size() > 0) {
+            return messages.get(messages.size() - 1).getText();
+        } else {
+            return "";
+        }
+
     }
 
     public RealmList<Message> getMessages() {

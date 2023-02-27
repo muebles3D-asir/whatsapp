@@ -56,15 +56,17 @@ public class ContactsActivity extends AppCompatActivity {
             users.addAll(realm.copyFromRealm(results));
         }
         contactRecyclerAdapter = new ContactRecyclerDataAdapter(results, position -> {
-            // TODO: ARREGLAR: No se ven los chats en el MainActivity
             RealmList<User> usersChat = new RealmList<>();
             usersChat.add(results.get(position));
             usersChat.add(MyApplication.currentUser);
             realm.beginTransaction();
             realm.copyToRealmOrUpdate(new Chat(usersChat));
             realm.commitTransaction();
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(ContactsActivity.this, ChatActivity.class);
+            intent.putExtra("id", results.get(position).getId());
             startActivity(intent);
+            Toast.makeText(this, results.get(position).getId() + "", Toast.LENGTH_SHORT).show();
+
         });
         recyclerView.setAdapter(contactRecyclerAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));

@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
     }
 
     @Override
-    public void openChat(int id) {
+    public  void openChat(int id) {
         Intent intent = new Intent(MainActivity.this, ChatActivity.class);
         intent.putExtra("id", id);
         startActivity(intent);
