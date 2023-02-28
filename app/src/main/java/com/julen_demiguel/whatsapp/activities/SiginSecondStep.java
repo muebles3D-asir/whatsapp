@@ -54,9 +54,6 @@ public class SiginSecondStep extends AppCompatActivity {
                         if (u.getTelef().equals(usuarioRegistro.getTelef())) {
                            usuarioExistente = true;
                             break;
-                        } else if (u.getPassword().equals(usuarioRegistro.getPassword())) {
-                          usuarioExistente = true;
-                            break;
                         }
                     }
                     if(!usuarioExistente) {

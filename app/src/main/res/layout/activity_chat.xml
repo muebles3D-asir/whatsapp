@@ -21,24 +21,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/imgShowInChat"
-            android:layout_width="106dp"
-            android:layout_height="88dp"
-            app:srcCompat="@drawable/perfil1" />
-
-        <TextView
-            android:id="@+id/nameShowInChat"
-            android:layout_width="299dp"
-            android:layout_height="88dp"
-            android:layout_weight="1"
-            android:paddingTop="30dp"
-            android:text="TextView"
-            android:textSize="30dp" />
-
-    </LinearLayout>
+        android:orientation="horizontal"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChat"

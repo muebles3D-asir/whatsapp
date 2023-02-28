@@ -19,6 +19,7 @@ import com.julen_demiguel.whatsapp.Models.User;
 import com.julen_demiguel.whatsapp.R;
 import com.julen_demiguel.whatsapp.adapters.ChatRecyclerDataAdapter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class ChatsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         resultsChat = realm.where(Chat.class).findAll();
-        // TODO: MODIFICAR ESTO (Filtrar los chats)
+
         for (Chat chat : resultsChat) {
             if (chat.getParticipants().contains(MyApplication.currentUser))
                 userChats.add(chat);
@@ -81,13 +82,12 @@ public class ChatsFragment extends Fragment {
         RealmList<User> usersChat = new RealmList<>();
         RealmList<Message> messages = new RealmList<>();
         User userExample = new User("Paco", "123456789", "test");
-        User userExample2 = new User("Pepe", "668456978", "test");
 
         usersChat.add(userExample);
         Date date = new Date();
 
         if (currentUser) usersChat.add(MyApplication.currentUser);
-        else usersChat.add(userExample2);
+
 
         Message mensaje = new Message("Hola gente", userExample, date);
         messages.add(mensaje);

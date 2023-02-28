@@ -33,7 +33,7 @@ public class ChatActivity extends AppCompatActivity {
     int id;
     Date date = new Date();
 
-    TextView tvNombre;
+
     EditText etMensaje;
     Button botonSend;
 
@@ -54,8 +54,6 @@ public class ChatActivity extends AppCompatActivity {
         botonSend = findViewById(R.id.btnSend);
         toolbar = findViewById(R.id.chatToolbar);
         rvChat = findViewById(R.id.rvChat);
-        tvNombre = findViewById(R.id.nameShowInChat);
-        tvNombre.setText(chat.getOtherUser().getName());
 
         toolbar.setTitle(chat.getOtherUser().getName());
         setSupportActionBar(toolbar);
