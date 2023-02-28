@@ -72,7 +72,6 @@ public class ContactsActivity extends AppCompatActivity {
         recyclerView.setAdapter(contactRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-
     }
 
     public interface ChatListener {

@@ -18,11 +18,11 @@ import com.julen_demiguel.whatsapp.R;
 
 import java.util.List;
 
-public class ChatRecyclerDataAdapter extends RecyclerView.Adapter<ChatRecyclerDataAdapter.RecyclerDataHolder>{
+public class ChatRecyclerDataAdapter extends RecyclerView.Adapter<ChatRecyclerDataAdapter.RecyclerDataHolder> {
     private List<Chat> chats;
     private OnItemClickListener listener;
 
-    public ChatRecyclerDataAdapter (List<Chat> chats, OnItemClickListener listener) {
+    public ChatRecyclerDataAdapter(List<Chat> chats, OnItemClickListener listener) {
         this.chats = chats;
         this.listener = listener;
     }
@@ -55,20 +55,18 @@ public class ChatRecyclerDataAdapter extends RecyclerView.Adapter<ChatRecyclerDa
             txtMensaje = itemView.findViewById(R.id.txtMensajeChat);
         }
 
-        public void asignData(Chat chat, OnItemClickListener listener){
+        public void asignData(Chat chat, OnItemClickListener listener) {
             User otherUser = chat.getOtherUser();
             imgFoto.setImageResource(otherUser.getImg());
             txtTitulo.setText(otherUser.getName());
             String mensaje = chat.getLastMessage();
-            if(mensaje != "") {
-                txtMensaje.setText(mensaje);
-            }
+            txtMensaje.setText(mensaje);
             itemView.setOnClickListener(view -> listener.onItemClick(getAdapterPosition()));
 
         }
     }
 
-    public interface  OnItemClickListener {
+    public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
