@@ -2,6 +2,7 @@ package com.julen_demiguel.whatsapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -68,7 +69,7 @@ public class ChatActivity extends AppCompatActivity {
         messages = chat.getMessages();
         messageDataAdapter = new MessageRecyclerDataAdapter(messages, chat.getOtherUser());
         rvChat.setAdapter(messageDataAdapter);
-        rvChat.setLayoutManager(new GridLayoutManager(this, 1));
+        rvChat.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         botonSend.setOnClickListener(v -> {
             if (etMensaje.getText().length() > 0){

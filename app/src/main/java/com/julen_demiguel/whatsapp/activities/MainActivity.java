@@ -1,7 +1,6 @@
 package com.julen_demiguel.whatsapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -9,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -18,9 +16,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.julen_demiguel.whatsapp.R;
 
 import com.julen_demiguel.whatsapp.Models.Chat;
-import com.julen_demiguel.whatsapp.Models.User;
-import com.julen_demiguel.whatsapp.adapters.ChatRecyclerDataAdapter;
-import com.julen_demiguel.whatsapp.adapters.ContactRecyclerDataAdapter;
 import com.julen_demiguel.whatsapp.adapters.MyViewPagerAdapter;
 import com.julen_demiguel.whatsapp.fragments.ChatsFragment;
 
@@ -38,9 +33,9 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
     Realm realm;
     MyViewPagerAdapter myViewPagerAdapter;
     FloatingActionButton fab;
-    RecyclerView recyclerView;
-    List<Chat> chats = new RealmList<>();
-    RealmResults<Chat> results;
+//    RecyclerView recyclerView;
+//    List<Chat> chats = new RealmList<>();
+//    RealmResults<Chat> results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +62,11 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
 
         fab.setOnClickListener(v -> {
 
-            Intent ToTouched = new Intent(MainActivity.this, ContactsActivity.class);
+            Intent ToTouched = new Intent(this, ContactsActivity.class);
             try {
                 startActivity(ToTouched);
             } catch (Exception e) {
-                Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -121,9 +116,7 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 1) {
 
-                }
             }
 
             @Override

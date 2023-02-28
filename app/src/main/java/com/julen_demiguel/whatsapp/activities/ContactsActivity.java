@@ -2,6 +2,7 @@ package com.julen_demiguel.whatsapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -69,7 +70,7 @@ public class ContactsActivity extends AppCompatActivity {
 
         });
         recyclerView.setAdapter(contactRecyclerAdapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
 
     }
