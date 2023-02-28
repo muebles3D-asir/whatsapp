@@ -30,9 +30,7 @@ public class ContactsActivity extends AppCompatActivity {
     ContactRecyclerDataAdapter contactRecyclerAdapter;
     Realm realm;
     androidx.appcompat.widget.Toolbar toolbar;
-    List<User> users = new RealmList<>();
     RealmResults<User> results;
-    private ChatListener callback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +49,29 @@ public class ContactsActivity extends AppCompatActivity {
         }
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        results = realm.where(User.class).findAll();
-        if (results.size() > 0) {
-            users.clear();
-            users.addAll(realm.copyFromRealm(results));
-        }
+        results = realm.where(User.class).notEqualTo("telef", MyApplication.currentUser.getTelef()).findAll();
+
         contactRecyclerAdapter = new ContactRecyclerDataAdapter(results, position -> {
             RealmList<User> usersChat = new RealmList<>();
             usersChat.add(results.get(position));
             usersChat.add(MyApplication.currentUser);
-            realm.beginTransaction();
-            realm.copyToRealmOrUpdate(new Chat(usersChat));
-            realm.commitTransaction();
+            RealmResults<Chat> chats = realm.where(Chat.class).findAll();
+            int id = -1;
+            for (Chat chat : chats) {
+                if (chat.getParticipants().contains(usersChat.get(0)) && chat.getParticipants().contains(usersChat.get(1))) {
+                    id = chat.getId();
+                    break;
+                }
+            }
+            if (id == -1){
+                realm.beginTransaction();
+                realm.copyToRealmOrUpdate(new Chat(usersChat));
+                realm.commitTransaction();
+                id = results.get(position).getId();
+            }
+
             Intent intent = new Intent(ContactsActivity.this, ChatActivity.class);
-            intent.putExtra("id", results.get(position).getId());
+            intent.putExtra("id", id);
             startActivity(intent);
             Toast.makeText(this, results.get(position).getId() + "", Toast.LENGTH_SHORT).show();
 
@@ -72,9 +79,5 @@ public class ContactsActivity extends AppCompatActivity {
         recyclerView.setAdapter(contactRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-    }
-
-    public interface ChatListener {
-        void openChat(int id);
     }
 }
