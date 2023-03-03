@@ -53,6 +53,7 @@ public class MessageRecyclerDataAdapter extends RecyclerView.Adapter<MessageRecy
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvMessage;
+        TextView tvMessage2;
 //        ImageView perfilImg;
 //        TextView nameMessage;
 //        LinearLayout layoutMessage;
@@ -60,19 +61,27 @@ public class MessageRecyclerDataAdapter extends RecyclerView.Adapter<MessageRecy
         public ViewHolder(View view) {
             super(view);
             tvMessage = view.findViewById(R.id.idlblMensajeShow);
+            tvMessage = view.findViewById(R.id.idlblMensajeShow2);
 //            perfilImg = (ImageView) view.findViewById(R.id.imgShowInChat);
 //            nameMessage = (TextView) view.findViewById(R.id.nameShowInChat);
 //            layoutMessage = (LinearLayout) view.findViewById(R.id.layoutMessage);
         }
 
         public void assignData(String message, int image, String name, int color) {
-            tvMessage.setText(message);
+                if(color == Color.parseColor("#D9FDD3")){
+                    tvMessage2.setText(message);
+
+                    tvMessage.setBackgroundColor(Color.WHITE);
+                }else{
+                    tvMessage.setText(message);
+
+                    tvMessage2.setBackgroundColor(Color.WHITE);
+                }
+
 //            if (perfilImg != null && nameMessage != null) {
 //                perfilImg.setImageResource(image);
 //                nameMessage.setText(name);
 //            }
-
-            itemView.setBackgroundColor(color);
         }
     }
 }
