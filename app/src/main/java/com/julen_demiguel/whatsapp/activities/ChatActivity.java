@@ -33,8 +33,6 @@ public class ChatActivity extends AppCompatActivity {
     Chat chat;
     int id;
     Date date = new Date();
-
-
     EditText etMensaje;
     Button botonSend;
 
