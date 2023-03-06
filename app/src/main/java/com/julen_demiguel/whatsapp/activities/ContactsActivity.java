@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.julen_demiguel.whatsapp.Application.MyApplication;
@@ -19,6 +20,7 @@ import com.julen_demiguel.whatsapp.adapters.ContactRecyclerDataAdapter;
 import com.julen_demiguel.whatsapp.fragments.ChatsFragment;
 
 import java.util.List;
+import java.util.Random;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -29,13 +31,18 @@ public class ContactsActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ContactRecyclerDataAdapter contactRecyclerAdapter;
     Realm realm;
+    Button botonCrearGrupo;
+    Random random = new Random();
     androidx.appcompat.widget.Toolbar toolbar;
     RealmResults<User> results;
+    int[] imgs = { R.drawable.bust_mask_1, R.drawable.bust_mask_2, R.drawable.bust_mask_3, R.drawable.bust_mask_4, R.drawable.bust_mask_5, R.drawable.bust_mask_6 };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+        botonCrearGrupo = findViewById(R.id.btnCreateGroup);
         recyclerView = findViewById(R.id.RecyclerUsers);
         realm = Realm.getDefaultInstance();
 
@@ -51,11 +58,13 @@ public class ContactsActivity extends AppCompatActivity {
 
         results = realm.where(User.class).notEqualTo("telef", MyApplication.currentUser.getTelef()).findAll();
 
+        RealmList<User> usersGroup = new RealmList<>();
+
         contactRecyclerAdapter = new ContactRecyclerDataAdapter(results, position -> {
             RealmList<User> usersChat = new RealmList<>();
             usersChat.add(results.get(position));
             usersChat.add(MyApplication.currentUser);
-            RealmResults<Chat> chats = realm.where(Chat.class).findAll();
+            RealmResults<Chat> chats = realm.where(Chat.class).equalTo("group", false).findAll();
             int id = -1;
             for (Chat chat : chats) {
                 if (chat.getParticipants().contains(usersChat.get(0)) && chat.getParticipants().contains(usersChat.get(1))) {
@@ -63,21 +72,44 @@ public class ContactsActivity extends AppCompatActivity {
                     break;
                 }
             }
-            if (id == -1){
+            if (id == -1) {
                 realm.beginTransaction();
-                realm.copyToRealmOrUpdate(new Chat(usersChat));
+                realm.copyToRealmOrUpdate(new Chat(usersChat, false));
                 realm.commitTransaction();
                 id = results.get(position).getId();
             }
 
-            Intent intent = new Intent(ContactsActivity.this, ChatActivity.class);
+            Intent intent = new Intent(com.julen_demiguel.whatsapp.activities.ContactsActivity.this, ChatActivity.class);
             intent.putExtra("id", id);
             startActivity(intent);
-            Toast.makeText(this, results.get(position).getId() + "", Toast.LENGTH_SHORT).show();
 
+        }, position -> {
+            botonCrearGrupo.setVisibility(View.VISIBLE);
+            usersGroup.add(results.get(position));
+            if (!usersGroup.contains(MyApplication.currentUser)) {
+                usersGroup.add(MyApplication.currentUser);
+            }
+            return true;
         });
+
+
         recyclerView.setAdapter(contactRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        botonCrearGrupo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                realm.beginTransaction();
+                Chat group = new Chat(usersGroup, true);
+                group.setImg(imgs[random.nextInt(imgs.length)]);
+                realm.copyToRealmOrUpdate(group);
+                realm.commitTransaction();
+                Intent intent = new Intent(ContactsActivity.this, GroupActivity.class);
+                intent.putExtra("id", group.getId());
+                startActivity(intent);
+            }
+        });
+
 
     }
 }

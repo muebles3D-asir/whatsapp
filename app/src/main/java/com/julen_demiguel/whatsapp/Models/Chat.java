@@ -14,39 +14,83 @@ public class Chat extends RealmObject {
     private int id;
     private RealmList<Message> messages;
     private RealmList<User> participants;
+    private boolean group;
+    private String nameGroup;
+    private int img;
 
-
-    public Chat() {}
-
-    public Chat(RealmList<User> participants) {
-      this.id = MyApplication.chatID.incrementAndGet();
-        this.participants = participants;
+    public Chat() {
     }
 
-    public Chat(RealmList<Message> messages, RealmList<User> participants) {
-        this(participants);
+    public Chat(RealmList<User> participants, boolean group) {
+        this.id = MyApplication.chatID.incrementAndGet();
+        this.participants = participants;
+        this.group = group;
+        this.nameGroup = "";
+    }
+
+    public Chat(RealmList<Message> messages, RealmList<User> participants, boolean group) {
+        this(participants, group);
         this.messages = messages;
+    }
+
+    public int getImg() {
+        return img;
+    }
+
+    public void setImg(int img) {
+        this.img = img;
+    }
+
+    public boolean isGroup() {
+        return group;
+    }
+
+    public void setGroup(boolean group) {
+        this.group = group;
     }
 
     public int getId() {
         return id;
     }
 
+    public String getNameGroup() {
+        return this.nameGroup;
+    }
+
     public User getOtherUser() {
-        for (User user : participants) {
-            if (user.getId() != MyApplication.currentUser.getId()) {
-                return user;
+        if (!group) {
+            for (User user : participants) {
+                if (user.getId() != MyApplication.currentUser.getId()) {
+                    return user;
+                }
             }
         }
+
         return null;
     }
 
+    public Boolean addUser(User newUser) {
+        if (participants.contains(newUser) || !group) return false;
+
+        participants.add(newUser);
+        return true;
+    }
+
     public String getLastMessage() {
-        if(messages.size() > 0) {
+        if (messages.size() > 0) {
             return messages.get(messages.size() - 1).getText();
         } else {
             return "";
         }
+
+    }
+
+    public boolean setNameGroup(String name) {
+        if (group){
+            this.nameGroup = name;
+            return  true;
+        }
+            return  false;
 
     }
 

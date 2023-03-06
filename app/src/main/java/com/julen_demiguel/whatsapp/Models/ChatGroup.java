@@ -5,20 +5,20 @@ import com.julen_demiguel.whatsapp.Application.MyApplication;
 import java.util.ArrayList;
 
 import io.realm.RealmList;
+import io.realm.RealmModel;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
-public class ChatGroup extends RealmObject {
+@RealmClass
+public class ChatGroup extends Chat implements RealmModel {
 
     @PrimaryKey
-
     private int id;
     private RealmList<Message> messages;
     private RealmList<User> participants;
 
-    public ChatGroup() {
-    }
-
+    public ChatGroup() { }
 
     public ChatGroup(RealmList<User> participants) {
         this.id = MyApplication.chatID.incrementAndGet();
@@ -30,7 +30,7 @@ public class ChatGroup extends RealmObject {
         this.messages = messages;
     }
 
-    public Boolean addUsr(User newUser) {
+    public Boolean addUser(User newUser) {
         if (participants.contains(newUser)) return false;
 
         participants.add(newUser);
@@ -38,28 +38,28 @@ public class ChatGroup extends RealmObject {
     }
 
 
-                public int getId() {
+    public int getId() {
         return id;
-        }
+    }
 
-        public void  setId(int id) {
+    public void setId(int id) {
         this.id = id;
-        }
+    }
 
-        public RealmList<Message> getMessages() {
+    public RealmList<Message> getMessages() {
         return messages;
-        }
+    }
 
-        public void setMessages(RealmList< Message> messages) {
+    public void setMessages(RealmList<Message> messages) {
         this.messages = messages;
-        }
+    }
 
-        public RealmList<User> getParticipants() {
+    public RealmList<User> getParticipants() {
         return participants;
-        }
+    }
 
-        public void setParticiats(RealmList<User> participants) {
+    public void setParticipants(RealmList<User> participants) {
         this.participants = participants;
-        }
+    }
 
 }

@@ -56,9 +56,13 @@ public class ChatRecyclerDataAdapter extends RecyclerView.Adapter<ChatRecyclerDa
         }
 
         public void asignData(Chat chat, OnItemClickListener listener) {
-            User otherUser = chat.getOtherUser();
-            imgFoto.setImageResource(otherUser.getImg());
-            txtTitulo.setText(otherUser.getName());
+            if (chat.isGroup()) {
+                txtTitulo.setText(chat.getNameGroup());
+            } else {
+                User otherUser = chat.getOtherUser();
+                imgFoto.setImageResource(otherUser.getImg());
+                txtTitulo.setText(otherUser.getName());
+            }
             String mensaje = chat.getLastMessage();
             txtMensaje.setText(mensaje);
             itemView.setOnClickListener(view -> listener.onItemClick(getAdapterPosition()));

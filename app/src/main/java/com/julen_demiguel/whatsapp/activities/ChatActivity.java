@@ -1,7 +1,6 @@
 package com.julen_demiguel.whatsapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +33,7 @@ public class ChatActivity extends AppCompatActivity {
     int id;
     Date date = new Date();
     EditText etMensaje;
+    TextView nameUserSender;
     Button botonSend;
 
 
@@ -42,21 +42,32 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         realm = Realm.getDefaultInstance();
-        try{
+        try {
             Bundle bundle = getIntent().getExtras();
             id = bundle.getInt("id");
             chat = realm.where(Chat.class).equalTo("id", id).findFirst();
-            getSupportActionBar().setTitle(chat.getOtherUser().getName());
-        } catch (NullPointerException e ){}
+            if (chat.isGroup()) {
+                getSupportActionBar().setTitle(chat.getNameGroup());
+            } else {
+                getSupportActionBar().setTitle(chat.getOtherUser().getName());
+            }
+        } catch (NullPointerException e) {
+        }
 
         etMensaje = findViewById(R.id.etMessage);
         botonSend = findViewById(R.id.btnSend);
         toolbar = findViewById(R.id.chatToolbar);
         rvChat = findViewById(R.id.rvChat);
+        nameUserSender = findViewById(R.id.idlblNamesender);
 
-        toolbar.setTitle(chat.getOtherUser().getName());
+        if (chat.isGroup()) {
+            toolbar.setTitle(chat.getNameGroup());
+        } else {
+            toolbar.setTitle(chat.getOtherUser().getName());
+        }
+
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         toolbar.setNavigationOnClickListener(v -> {
