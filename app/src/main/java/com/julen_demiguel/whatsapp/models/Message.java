@@ -1,4 +1,4 @@
-package com.julen_demiguel.whatsapp.Models;
+package com.julen_demiguel.whatsapp.models;
 
 import com.julen_demiguel.whatsapp.Application.MyApplication;
 

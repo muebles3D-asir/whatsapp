@@ -35,14 +35,12 @@
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="-100dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:layout_marginBottom="-100dp"
-            ></androidx.viewpager.widget.ViewPager>
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/idbtnNewChat"
@@ -51,6 +49,8 @@
             android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
             app:srcCompat="@drawable/buscar"
             app:backgroundTint="@color/Whatsapp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

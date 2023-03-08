@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.julen_demiguel.whatsapp.Models.User;
+import com.julen_demiguel.whatsapp.models.User;
 import com.julen_demiguel.whatsapp.R;
 
 import java.util.List;
@@ -21,13 +21,10 @@ public class ContactRecyclerDataAdapter extends RecyclerView.Adapter<ContactRecy
     private OnItemClickListener listener;
     private OnItemLongClickListener longClickListener;
 
-    public ContactRecyclerDataAdapter(List<User> contacts, OnItemClickListener listener, OnItemLongClickListener longClickListener) {
+    public ContactRecyclerDataAdapter(List<User> contacts, OnItemClickListener click, OnItemLongClickListener longClick) {
         this.contacts = contacts;
-        this.listener = listener;
-        this.longClickListener = longClickListener;
-    }
-
-    public ContactRecyclerDataAdapter(RealmResults<User> results, OnItemClickListener id) {
+        this.listener = click;
+        this.longClickListener = longClick;
     }
 
     @NonNull

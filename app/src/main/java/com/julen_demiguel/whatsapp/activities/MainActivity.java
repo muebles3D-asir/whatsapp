@@ -1,7 +1,6 @@
 package com.julen_demiguel.whatsapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -15,15 +14,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.julen_demiguel.whatsapp.R;
 
-import com.julen_demiguel.whatsapp.Models.Chat;
 import com.julen_demiguel.whatsapp.adapters.MyViewPagerAdapter;
 import com.julen_demiguel.whatsapp.fragments.ChatsFragment;
 
-import java.util.List;
-
 import io.realm.Realm;
-import io.realm.RealmList;
-import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity implements ChatsFragment.ChatListener {
 
@@ -33,19 +27,16 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
     Realm realm;
     MyViewPagerAdapter myViewPagerAdapter;
     FloatingActionButton fab;
-//    RecyclerView recyclerView;
-//    List<Chat> chats = new RealmList<>();
-//    RealmResults<Chat> results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         realm = Realm.getDefaultInstance();
+
         fab = findViewById(R.id.idbtnNewChat);
-
-
         tabLayout = findViewById(R.id.tabLayout);
+
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.comunidad));
         tabLayout.addTab(tabLayout.newTab().setText("Chats"));
         tabLayout.addTab(tabLayout.newTab().setText("Estados"));
@@ -53,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
 
         LinearLayout layout = ((LinearLayout) ((LinearLayout) tabLayout.getChildAt(0)).getChildAt(0));
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) layout.getLayoutParams();
-        layoutParams.weight = 0.5f; // e.g. 0.5f
+        layoutParams.weight = 0.5f;
         layout.setLayoutParams(layoutParams);
 
         toolbar = findViewById(R.id.Toolbar);
@@ -61,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
         setSupportActionBar(toolbar);
 
         fab.setOnClickListener(v -> {
-
             Intent ToTouched = new Intent(this, ContactsActivity.class);
             try {
                 startActivity(ToTouched);
@@ -130,7 +120,6 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
     @Override
     public void onBackPressed() {
         tabLayout.selectTab(tabLayout.getTabAt(0));
-        ChatsFragment chatFragment = (ChatsFragment) myViewPagerAdapter.getItem(0);
     }
 
     @Override
@@ -152,8 +141,8 @@ public class MainActivity extends AppCompatActivity implements ChatsFragment.Cha
     }
 
     @Override
-    public  void openChat(int id) {
-        Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+    public void openChat(int id) {
+        Intent intent = new Intent(this, ChatActivity.class);
         intent.putExtra("id", id);
         startActivity(intent);
         Toast.makeText(this, id + "", Toast.LENGTH_SHORT).show();

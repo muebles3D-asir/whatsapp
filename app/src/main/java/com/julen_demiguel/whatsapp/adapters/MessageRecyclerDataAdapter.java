@@ -1,19 +1,16 @@
 package com.julen_demiguel.whatsapp.adapters;
 
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.julen_demiguel.whatsapp.Application.MyApplication;
-import com.julen_demiguel.whatsapp.Models.Message;
-import com.julen_demiguel.whatsapp.Models.User;
+import com.julen_demiguel.whatsapp.models.Message;
+import com.julen_demiguel.whatsapp.models.User;
 import com.julen_demiguel.whatsapp.R;
 
 
@@ -68,15 +65,13 @@ public class MessageRecyclerDataAdapter extends RecyclerView.Adapter<MessageRecy
         }
 
         public void assignData(String message, int image, String name, int color) {
-                if(color == Color.parseColor("#D9FDD3")){
-                    tvMessage2.setText(message);
-
-                    tvMessage.setBackgroundColor(Color.WHITE);
-                }else{
-                    tvMessage.setText(message);
-
-                    tvMessage2.setBackgroundColor(Color.WHITE);
-                }
+            if (color == Color.parseColor("#D9FDD3")) {
+                tvMessage2.setText(message);
+                tvMessage.setBackgroundColor(Color.WHITE);
+            } else {
+                tvMessage.setText(message);
+                tvMessage2.setBackgroundColor(Color.WHITE);
+            }
 
 //            if (perfilImg != null && nameMessage != null) {
 //                perfilImg.setImageResource(image);

@@ -1,7 +1,6 @@
 package com.julen_demiguel.whatsapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,17 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.julen_demiguel.whatsapp.Application.MyApplication;
-import com.julen_demiguel.whatsapp.Models.Chat;
-import com.julen_demiguel.whatsapp.Models.User;
+import com.julen_demiguel.whatsapp.models.Chat;
+import com.julen_demiguel.whatsapp.models.User;
 import com.julen_demiguel.whatsapp.R;
-import com.julen_demiguel.whatsapp.adapters.ChatRecyclerDataAdapter;
 import com.julen_demiguel.whatsapp.adapters.ContactRecyclerDataAdapter;
-import com.julen_demiguel.whatsapp.fragments.ChatsFragment;
 
-import java.util.List;
 import java.util.Random;
 
 import io.realm.Realm;
@@ -30,30 +25,31 @@ public class ContactsActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ContactRecyclerDataAdapter contactRecyclerAdapter;
+
     Realm realm;
+    RealmResults<User> results;
+
     Button botonCrearGrupo;
     Random random = new Random();
     androidx.appcompat.widget.Toolbar toolbar;
-    RealmResults<User> results;
-    int[] imgs = { R.drawable.bust_mask_1, R.drawable.bust_mask_2, R.drawable.bust_mask_3, R.drawable.bust_mask_4, R.drawable.bust_mask_5, R.drawable.bust_mask_6 };
-
+    int[] imgs = {R.drawable.bust_mask_1, R.drawable.bust_mask_2, R.drawable.bust_mask_3, R.drawable.bust_mask_4, R.drawable.bust_mask_5, R.drawable.bust_mask_6};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
-        botonCrearGrupo = findViewById(R.id.btnCreateGroup);
-        recyclerView = findViewById(R.id.RecyclerUsers);
         realm = Realm.getDefaultInstance();
 
+        botonCrearGrupo = findViewById(R.id.btnCreateGroup);
+        recyclerView = findViewById(R.id.RecyclerUsers);
         toolbar = findViewById(R.id.ContactsToolbar);
+
         toolbar.setTitle("Contactos");
         setSupportActionBar(toolbar);
         toolbar.getMenu().clear();
         toolbar.inflateMenu(R.menu.community_menu);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+
+        if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         results = realm.where(User.class).notEqualTo("telef", MyApplication.currentUser.getTelef()).findAll();
@@ -79,16 +75,15 @@ public class ContactsActivity extends AppCompatActivity {
                 id = results.get(position).getId();
             }
 
-            Intent intent = new Intent(com.julen_demiguel.whatsapp.activities.ContactsActivity.this, ChatActivity.class);
+            Intent intent = new Intent(this, ChatActivity.class);
             intent.putExtra("id", id);
             startActivity(intent);
 
         }, position -> {
             botonCrearGrupo.setVisibility(View.VISIBLE);
             usersGroup.add(results.get(position));
-            if (!usersGroup.contains(MyApplication.currentUser)) {
-                usersGroup.add(MyApplication.currentUser);
-            }
+
+            if (!usersGroup.contains(MyApplication.currentUser)) usersGroup.add(MyApplication.currentUser);
             return true;
         });
 
@@ -109,7 +104,12 @@ public class ContactsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent toMain = new Intent(this, MainActivity.class);
+        startActivity(toMain);
+    }
+
 }

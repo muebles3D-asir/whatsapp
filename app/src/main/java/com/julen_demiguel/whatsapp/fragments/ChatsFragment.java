@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,14 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.julen_demiguel.whatsapp.Application.MyApplication;
-import com.julen_demiguel.whatsapp.Models.Chat;
-import com.julen_demiguel.whatsapp.Models.Message;
-import com.julen_demiguel.whatsapp.Models.User;
+import com.julen_demiguel.whatsapp.models.Chat;
 import com.julen_demiguel.whatsapp.R;
 import com.julen_demiguel.whatsapp.adapters.ChatRecyclerDataAdapter;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;

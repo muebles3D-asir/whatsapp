@@ -54,19 +54,22 @@
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/activity_chat.xml" value="0.1265625" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/activity_contacts.xml" value="0.38697916666666665" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/activity_login.xml" value="0.38697916666666665" />
+        <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/activity_main.xml" value="0.38697916666666665" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/chat_item.xml" value="0.38697916666666665" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/chatsuser.xml" value="0.38697916666666665" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/fragment_chats.xml" value="0.38697916666666665" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/fragment_community.xml" value="0.38697916666666665" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/fragment_estados.xml" value="0.38697916666666665" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/fragment_llamadas.xml" value="0.38697916666666665" />
-        <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/message_estructure.xml" value="0.1" />
+        <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/message_estructure.xml" value="0.33" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/message_estructure_currentuser.xml" value="0.27447916666666666" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/message_estructure_otheruser.xml" value="0.2734375" />
+        <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/messagegroup_estructure.xml" value="0.38697916666666665" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/show_users.xml" value="0.38697916666666665" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/showchat.xml" value="0.38697916666666665" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/sigin_fragment_step1.xml" value="0.38697916666666665" />
         <entry key="..\:/workspace_android/whatsapp/app/src/main/res/layout/sigin_fragment_step2.xml" value="0.38697916666666665" />
+        <entry key="..\:/workspace_android/whatsapp/app/src/main/res/menu/chats_menu.xml" value="0.38697916666666665" />
       </map>
     </option>
   </component>
