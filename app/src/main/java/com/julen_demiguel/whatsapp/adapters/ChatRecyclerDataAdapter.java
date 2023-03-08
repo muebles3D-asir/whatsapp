@@ -53,7 +53,7 @@ public class ChatRecyclerDataAdapter extends RecyclerView.Adapter<ChatRecyclerDa
 
         public void asignData(Chat chat, OnItemClickListener listener) {
             if (chat.isGroup()) {
-                txtTitulo.setText(chat.getNameGroup());
+                txtTitulo.setText(chat.getName());
             } else {
                 User otherUser = chat.getOtherUser();
                 imgFoto.setImageResource(otherUser.getImg());

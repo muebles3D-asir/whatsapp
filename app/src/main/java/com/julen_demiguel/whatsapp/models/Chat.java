@@ -32,7 +32,7 @@ public class Chat extends RealmObject {
     }
 
     public int getImg() {
-        return img;
+        return group ? this.img : this.getOtherUser().getImg() ;
     }
 
     public void setImg(int img) {
@@ -51,8 +51,8 @@ public class Chat extends RealmObject {
         return id;
     }
 
-    public String getNameGroup() {
-        return this.nameGroup;
+    public String getName() {
+        return ! group ? this.getOtherUser().getName() :this.nameGroup;
     }
 
     public User getOtherUser() {
@@ -83,12 +83,13 @@ public class Chat extends RealmObject {
 
     }
 
-    public boolean setNameGroup(String name) {
+    public boolean setName(String name) {
         if (group) {
             this.nameGroup = name;
             return true;
         }
 
+        this.nameGroup = "";
         return false;
     }
 

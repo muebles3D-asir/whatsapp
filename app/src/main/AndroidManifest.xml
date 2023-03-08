@@ -14,11 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsApp"
         tools:targetApi="31">
+
         <activity
-            android:name=".GroupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".GrupuActivity"
+            android:name=".activities.GroupActivity"
             android:exported="false"
             android:label="@string/title_activity_grupu"
             android:theme="@style/Theme.WhatsApp.NoActionBar" />

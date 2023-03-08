@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.julen_demiguel.whatsapp.Application.MyApplication;
@@ -99,6 +100,7 @@ public class ContactsActivity extends AppCompatActivity {
                 group.setImg(imgs[random.nextInt(imgs.length)]);
                 realm.copyToRealmOrUpdate(group);
                 realm.commitTransaction();
+
                 Intent intent = new Intent(ContactsActivity.this, GroupActivity.class);
                 intent.putExtra("id", group.getId());
                 startActivity(intent);

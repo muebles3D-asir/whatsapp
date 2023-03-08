@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.julen_demiguel.whatsapp.Application.MyApplication;
@@ -34,7 +37,7 @@ public class ChatActivity extends AppCompatActivity {
     int id;
     Date date = new Date();
     EditText etMensaje;
-    TextView nameUserSender;
+    ImageView imgUserSender;
     Button botonSend;
 
 
@@ -49,20 +52,26 @@ public class ChatActivity extends AppCompatActivity {
             id = bundle.getInt("id");
             chat = realm.where(Chat.class).equalTo("id", id).findFirst();
 
-            if (chat.isGroup()) getSupportActionBar().setTitle(chat.getNameGroup());
-            else getSupportActionBar().setTitle(chat.getOtherUser().getName());
+            getSupportActionBar().setTitle(chat.getName());
 
-        } catch (NullPointerException e) { }
+        } catch (NullPointerException e) {
+            Log.d("Debug:::test",id+"");
+        }
 
         etMensaje = findViewById(R.id.etMessage);
         botonSend = findViewById(R.id.btnSend);
         toolbar = findViewById(R.id.chatToolbar);
         rvChat = findViewById(R.id.rvChat);
-        nameUserSender = findViewById(R.id.idlblNamesender);
+        imgUserSender = findViewById(R.id.imgFotoDePerfilChat);
 
-        if (chat.isGroup()) toolbar.setTitle(chat.getNameGroup());
-        else toolbar.setTitle(chat.getOtherUser().getName());
-
+        try {
+            toolbar.setTitle(chat.getName());
+            if (chat.isGroup()) {
+                imgUserSender.setImageResource(chat.getImg());
+            }
+        } catch (Exception e){
+            Log.d("Debug:::imagen",chat.getImg()+"");
+        }
 
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -73,7 +82,7 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         messages = chat.getMessages();
-        messageDataAdapter = new MessageRecyclerDataAdapter(messages, chat.getOtherUser());
+        messageDataAdapter = new MessageRecyclerDataAdapter(messages, chat.isGroup());
         rvChat.setAdapter(messageDataAdapter);
         rvChat.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
