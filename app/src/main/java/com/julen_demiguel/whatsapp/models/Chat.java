@@ -84,12 +84,12 @@ public class Chat extends RealmObject {
     }
 
     public boolean setNameGroup(String name) {
-        if (group){
+        if (group) {
             this.nameGroup = name;
-            return  true;
+            return true;
         }
-            return  false;
 
+        return false;
     }
 
     public RealmList<Message> getMessages() {

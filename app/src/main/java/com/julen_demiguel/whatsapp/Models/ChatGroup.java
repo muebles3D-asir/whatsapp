@@ -1,11 +1,8 @@
-package com.julen_demiguel.whatsapp.Models;
+package com.julen_demiguel.whatsapp.models;
 
 import com.julen_demiguel.whatsapp.Application.MyApplication;
 
-import java.util.ArrayList;
-
 import io.realm.RealmList;
-import io.realm.RealmModel;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;

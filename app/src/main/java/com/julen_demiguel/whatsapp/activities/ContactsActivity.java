@@ -28,13 +28,8 @@ public class ContactsActivity extends AppCompatActivity {
     ContactRecyclerDataAdapter contactRecyclerAdapter;
 
     Realm realm;
-<<<<<<< HEAD
     RealmResults<User> results;
-
-    Button botonCrearGrupo;
-=======
     FloatingActionButton botonCrearGrupo;
->>>>>>> 1734dc7d9d39ab362b8271a939e423c74d1be742
     Random random = new Random();
     androidx.appcompat.widget.Toolbar toolbar;
     int[] imgs = {R.drawable.bust_mask_1, R.drawable.bust_mask_2, R.drawable.bust_mask_3, R.drawable.bust_mask_4, R.drawable.bust_mask_5, R.drawable.bust_mask_6};
