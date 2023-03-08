@@ -11,7 +11,7 @@ import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 
 @RealmClass
-public class ChatGroup extends Chat implements RealmModel {
+public class ChatGroup extends RealmObject  {
 
     @PrimaryKey
     private int id;

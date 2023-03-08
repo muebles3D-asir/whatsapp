@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.julen_demiguel.whatsapp.Application.MyApplication;
 import com.julen_demiguel.whatsapp.Models.Chat;
 import com.julen_demiguel.whatsapp.Models.User;
@@ -31,7 +32,7 @@ public class ContactsActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ContactRecyclerDataAdapter contactRecyclerAdapter;
     Realm realm;
-    Button botonCrearGrupo;
+    FloatingActionButton botonCrearGrupo;
     Random random = new Random();
     androidx.appcompat.widget.Toolbar toolbar;
     RealmResults<User> results;
